@@ -35,8 +35,8 @@ function Dropdown({ title, children, children2 }: Props) {
             onClick={ToggleDropdown}
           ></FontAwesomeIcon>
         </div>
+        {IsOpen && <div>{children2}</div>}
       </div>
-      {IsOpen && <div>{children2}</div>}
     </>
   );
 }
