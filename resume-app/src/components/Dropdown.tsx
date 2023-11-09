@@ -14,6 +14,7 @@ function Dropdown({ title, children, children2 }: Props) {
 
   const ToggleDropdown = () => {
     SetIsOpen(!IsOpen);
+    console.log("click");
   };
 
   return (
@@ -35,7 +36,7 @@ function Dropdown({ title, children, children2 }: Props) {
           ></FontAwesomeIcon>
         </div>
       </div>
-      {IsOpen && { children2 }}
+      {IsOpen && <div>{children2}</div>}
     </>
   );
 }
