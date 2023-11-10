@@ -23,7 +23,7 @@ export default function App() {
         <Dropdown title="Education" children2={<Education></Education>}>
           {<FontAwesomeIcon icon={faUserGraduate}></FontAwesomeIcon>}
         </Dropdown>
-        <Dropdown title="Experience" children2={<General></General>}>
+        <Dropdown title="Experience" children2={<Work></Work>}>
           {<FontAwesomeIcon icon={faBriefcase}></FontAwesomeIcon>}
         </Dropdown>
       </div>
