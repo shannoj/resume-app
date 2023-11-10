@@ -1,7 +1,7 @@
 function General() {
   return (
     <>
-      <form className="w-full max-w-sm">
+      <form className="flex w-full max-w-sm flex-col align-center justify-around">
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3 mt-2 ml-2">
             <label
@@ -56,6 +56,24 @@ function General() {
             ></input>
           </div>
         </div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3 mt-2 ml-2">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="inline-first-name"
+            >
+              Phone
+            </label>
+          </div>
+          <div className="md:w-2/3 mt-2 mr-2">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="inline-first-name"
+              type="tel"
+              placeholder="+12345678910"
+            ></input>
+          </div>
+        </div>
         <div className="flex flex-wrap -mx-3 mb-2 ml-2 mr-2">
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
@@ -65,7 +83,7 @@ function General() {
               City
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               id="grid-city"
               type="text"
               placeholder="Albuquerque"
@@ -80,7 +98,7 @@ function General() {
             </label>
             <div className="relative">
               <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="grid-state"
               >
                 <option value="AL">Alabama</option>
@@ -154,11 +172,21 @@ function General() {
               Zip
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               id="grid-zip"
               type="text"
               placeholder="90210"
             ></input>
+          </div>
+        </div>
+        <div className="md:flex md:items-center mb-2">
+          <div className="md:w-full flex justify-center align-center">
+            <button
+              className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              type="button"
+            >
+              Save
+            </button>
           </div>
         </div>
       </form>
