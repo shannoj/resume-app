@@ -7,9 +7,10 @@ interface Props {
   title: string;
   children: ReactNode;
   children2: ReactNode;
+  height: number;
 }
 
-function Dropdown({ title, children, children2 }: Props) {
+function Dropdown({ title, children, children2, height }: Props) {
   const [IsOpen, SetIsOpen] = useState(false);
 
   const ToggleDropdown = () => {
@@ -45,7 +46,9 @@ function Dropdown({ title, children, children2 }: Props) {
         </div>
       </div>
       {IsOpen && (
-        <div className="flex flex-row justify-center h-4/5 align-center w-4/5 bg-neutral-50 rounded-md mt-1 mb-2 shadow-sm hover:shadow-lg">
+        <div
+          className={`flex flex-row justify-center min-h-${height} max-h-${height} align-center w-4/5 bg-neutral-50 rounded-md mt-1 mb-2 shadow-sm hover:shadow-lg`}
+        >
           {children2}
         </div>
       )}

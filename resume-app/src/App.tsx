@@ -17,13 +17,18 @@ export default function App() {
         <Dropdown
           title="Background Information"
           children2={<General></General>}
+          height={4 / 5}
         >
           {<FontAwesomeIcon icon={faUser}></FontAwesomeIcon>}
         </Dropdown>
-        <Dropdown title="Education" children2={<Education></Education>}>
+        <Dropdown
+          title="Education"
+          children2={<Education></Education>}
+          height={4 / 5}
+        >
           {<FontAwesomeIcon icon={faUserGraduate}></FontAwesomeIcon>}
         </Dropdown>
-        <Dropdown title="Experience" children2={<Work></Work>}>
+        <Dropdown title="Experience" children2={<Work></Work>} height={4 / 5}>
           {<FontAwesomeIcon icon={faBriefcase}></FontAwesomeIcon>}
         </Dropdown>
       </div>
