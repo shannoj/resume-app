@@ -1,7 +1,7 @@
 function General() {
   return (
     <>
-      <div>Hello</div>
+      <div className="h-{100px}">Hello</div>
     </>
   );
 }
