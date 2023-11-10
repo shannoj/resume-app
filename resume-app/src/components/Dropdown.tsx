@@ -19,7 +19,7 @@ function Dropdown({ title, children, children2 }: Props) {
 
   return (
     <>
-      <div className="flex flex-row justify-between align-center w-4/5 h-12 bg-neutral-50 rounded-md mt-6 mb-2 shadow-sm hover:shadow-lg">
+      <div className="flex flex-row justify-between align-center w-4/5 min-h-[50px] max-h-[50px] bg-neutral-50 rounded-md mt-6 mb-2 shadow-sm hover:shadow-lg">
         <div className="box flex flex-row justify-start align-center w-4/5 h-full">
           <div className="flex flex-col justify-center align-center h-full ml-2">
             {children}

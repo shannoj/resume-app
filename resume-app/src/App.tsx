@@ -13,7 +13,7 @@ import Education from "./components/EducationInfo";
 export default function App() {
   return (
     <>
-      <div className="information-container mx-5 mt-10 mb-10 rounded-md shadow-md">
+      <div className="flex absolute overflow-auto information-container mx-5 mt-10 mb-10 rounded-md shadow-md flex-nowrap">
         <Dropdown
           title="Background Information"
           children2={<General></General>}
