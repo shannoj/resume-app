@@ -5,7 +5,7 @@ function Work() {
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3 mt-2 ml-2">
             <label
-              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              className="block uppercase tracking-wide text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
               htmlFor="company"
             >
               Company
@@ -27,12 +27,12 @@ function Work() {
           >
             Deatils
           </label>
-          <input
-            className="flex flex-col justify-start bg-gray-200 appearance-none mr-2 border-2 border-gray-200 rounded w-full h-2/3 px-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+          <textarea
+            className="flex flex-col justify-start bg-gray-200 appearance-none mr-2 border-2 border-gray-200 rounded w-full h-2/3 px-2 py-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             id="details"
-            type="text"
-            placeholder="made stuff"
-          ></input>
+            rows={4}
+            placeholder="Made stuff"
+          ></textarea>
         </div>
         <div className="flex flex-wrap -mx-3 mb-2 ml-2 mr-2 w-full justify-around">
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
