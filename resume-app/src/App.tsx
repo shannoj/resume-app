@@ -13,26 +13,28 @@ import Education from "./components/EducationInfo";
 export default function App() {
   return (
     <>
-      <div className="flex absolute overflow-auto information-container mx-5 mt-10 mb-10 rounded-md shadow-md flex-nowrap">
-        <Dropdown
-          title="Background Information"
-          children2={<General></General>}
-          height={4 / 5}
-        >
-          {<FontAwesomeIcon icon={faUser}></FontAwesomeIcon>}
-        </Dropdown>
-        <Dropdown
-          title="Education"
-          children2={<Education></Education>}
-          height={4 / 5}
-        >
-          {<FontAwesomeIcon icon={faUserGraduate}></FontAwesomeIcon>}
-        </Dropdown>
-        <Dropdown title="Experience" children2={<Work></Work>} height={4 / 5}>
-          {<FontAwesomeIcon icon={faBriefcase}></FontAwesomeIcon>}
-        </Dropdown>
+      <div className="flex flex-row w-screen h-full justify-between items-center">
+        <div className="flex flex-col h-[90%] w-1/3 items-center justify-start bg-slate-500 overflow-auto mx-5 rounded-md shadow-md">
+          <Dropdown
+            title="Background Information"
+            children2={<General></General>}
+            height={4 / 5}
+          >
+            {<FontAwesomeIcon icon={faUser}></FontAwesomeIcon>}
+          </Dropdown>
+          <Dropdown
+            title="Education"
+            children2={<Education></Education>}
+            height={4 / 5}
+          >
+            {<FontAwesomeIcon icon={faUserGraduate}></FontAwesomeIcon>}
+          </Dropdown>
+          <Dropdown title="Experience" children2={<Work></Work>} height={4 / 5}>
+            {<FontAwesomeIcon icon={faBriefcase}></FontAwesomeIcon>}
+          </Dropdown>
+        </div>
+        <div className="flex bg-slate-500 h-[95%] w-1/2 mr-5"></div>
       </div>
-      <div className="resume-container"></div>
     </>
   );
 }

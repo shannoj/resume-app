@@ -25,7 +25,7 @@ function Dropdown({ title, children, children2, height }: Props) {
           <div className="flex flex-col justify-center align-center h-full ml-2">
             {children}
           </div>
-          <p className="flex flex-col justify-center align-center font-serif h-full ml-2 font-bold w-4/5">
+          <p className="flex flex-col justify-center align-center uppercase tracking-wide text-gray-700 h-full ml-2 font-bold w-4/5">
             {title}
           </p>
         </div>
