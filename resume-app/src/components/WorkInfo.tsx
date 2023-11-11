@@ -67,7 +67,7 @@ function Work() {
             ></input>
           </div>
         </div>
-        <div className="w-19/20 h-full ml-2 mr-2">
+        <div className="w-19/20 h-full ml-2 mr-2 mb-4">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             htmlFor="details"

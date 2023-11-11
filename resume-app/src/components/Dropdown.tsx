@@ -47,7 +47,7 @@ function Dropdown({ title, children, children2, height }: Props) {
       </div>
       {IsOpen && (
         <div
-          className={`flex flex-row justify-center min-h-${height} max-h-${height} align-center w-4/5 bg-neutral-50 rounded-md mt-1 mb-2 shadow-sm hover:shadow-lg`}
+          className={`flex flex-row justify-center min-h-${height} max-h-${height} align-center w-4/5 bg-gradient-to-r from-gray-100 to-gray-300 rounded-md mt-1 mb-2 shadow-sm hover:shadow-lg`}
         >
           {children2}
         </div>
