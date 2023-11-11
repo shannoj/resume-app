@@ -1,7 +1,33 @@
+import { useState, ChangeEvent, FormEvent } from "react";
+
 function General() {
+  const [formData, setFormData] = useState({
+    email: "",
+    phone: "",
+  });
+
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Add your form submission logic here
+    console.log("Form submitted:", formData);
+  };
+
   return (
     <>
-      <form className="flex w-full max-w-sm flex-col align-center justify-around">
+      <form
+        className="flex w-full max-w-sm flex-col align-center justify-around"
+        onSubmit={handleSubmit}
+      >
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3 mt-2 ml-2">
             <label
@@ -17,6 +43,7 @@ function General() {
               id="inline-first-name"
               type="text"
               placeholder="Jane"
+              onChange={handleInputChange}
             ></input>
           </div>
         </div>
@@ -24,7 +51,7 @@ function General() {
           <div className="md:w-1/3 mt-2 ml-2">
             <label
               className="block uppercase tracking-wide text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              htmlFor="inline-first-name"
+              htmlFor="inline-last-name"
             >
               Last Name
             </label>
@@ -32,9 +59,10 @@ function General() {
           <div className="md:w-2/3 mt-2 mr-2">
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="inline-first-name"
+              id="inline-last-name"
               type="text"
               placeholder="Doe"
+              onChange={handleInputChange}
             ></input>
           </div>
         </div>
@@ -42,7 +70,7 @@ function General() {
           <div className="md:w-1/3 mt-2 ml-2">
             <label
               className="block uppercase tracking-wide text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              htmlFor="inline-first-name"
+              htmlFor="email"
             >
               Email
             </label>
@@ -50,9 +78,10 @@ function General() {
           <div className="md:w-2/3 mt-2 mr-2">
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="inline-first-name"
+              id="email"
               type="email"
               placeholder="myemail@gmail.com"
+              onChange={handleInputChange}
             ></input>
           </div>
         </div>
@@ -60,7 +89,7 @@ function General() {
           <div className="md:w-1/3 mt-2 ml-2">
             <label
               className="block uppercase tracking-wide text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              htmlFor="inline-first-name"
+              htmlFor="phone"
             >
               Phone
             </label>
@@ -68,9 +97,10 @@ function General() {
           <div className="md:w-2/3 mt-2 mr-2">
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="inline-first-name"
+              id="phone"
               type="tel"
               placeholder="+12345678910"
+              onChange={handleInputChange}
             ></input>
           </div>
         </div>
@@ -87,6 +117,7 @@ function General() {
               id="grid-city"
               type="text"
               placeholder="Albuquerque"
+              onChange={handleInputChange}
             ></input>
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -100,6 +131,7 @@ function General() {
               <select
                 className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="grid-state"
+                onChange={handleInputChange}
               >
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
@@ -176,6 +208,7 @@ function General() {
               id="grid-zip"
               type="text"
               placeholder="90210"
+              onChange={handleInputChange}
             ></input>
           </div>
         </div>
