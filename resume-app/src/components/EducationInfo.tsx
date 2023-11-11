@@ -1,7 +1,33 @@
+import { useState, ChangeEvent, FormEvent } from "react";
+
 function Education() {
+  const [formData, setFormData] = useState({
+    university: "",
+    major: "",
+  });
+
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Add your form submission logic here
+    console.log("Form submitted:", formData);
+  };
+
   return (
     <>
-      <form className="flex w-full max-w-sm flex-col align-center justify-start">
+      <form
+        className="flex w-full max-w-sm flex-col align-center justify-start"
+        onSubmit={handleSubmit}
+      >
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3 mt-2 ml-2">
             <label
@@ -17,6 +43,7 @@ function Education() {
               id="university"
               type="text"
               placeholder="Harvard (lol)"
+              onChange={handleInputChange}
             ></input>
           </div>
         </div>
@@ -35,6 +62,7 @@ function Education() {
               id="major"
               type="text"
               placeholder="Computer Science"
+              onChange={handleInputChange}
             ></input>
           </div>
         </div>
@@ -51,6 +79,7 @@ function Education() {
               id="year-start"
               type="text"
               placeholder="2016"
+              onChange={handleInputChange}
             ></input>
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -65,6 +94,7 @@ function Education() {
               id="year-end"
               type="text"
               placeholder="2020"
+              onChange={handleInputChange}
             ></input>
           </div>
         </div>
