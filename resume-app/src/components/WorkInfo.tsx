@@ -1,7 +1,34 @@
+import { useState, ChangeEvent, FormEvent } from "react";
+
 function Work() {
+  const [formData, setFormData] = useState({
+    company: "",
+    position: "",
+    details: "",
+  });
+
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Add your form submission logic here
+    console.log("Form submitted:", formData);
+  };
+
   return (
     <>
-      <form className="flex w-full max-w-sm flex-col align-center justify-start">
+      <form
+        className="flex w-full max-w-sm flex-col align-center justify-start"
+        onSubmit={handleSubmit}
+      >
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3 mt-2 ml-2">
             <label
@@ -17,6 +44,26 @@ function Work() {
               id="company"
               type="text"
               placeholder="Apple"
+              onChange={handleInputChange}
+            ></input>
+          </div>
+        </div>
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3 mt-2 ml-2">
+            <label
+              className="block uppercase tracking-wide text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="position"
+            >
+              Position
+            </label>
+          </div>
+          <div className="md:w-2/3 mt-2 mr-2">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="position"
+              type="text"
+              placeholder="Software Engineer"
+              onChange={handleInputChange}
             ></input>
           </div>
         </div>
@@ -32,6 +79,7 @@ function Work() {
             id="details"
             rows={4}
             placeholder="Made stuff"
+            onChange={handleInputChange}
           ></textarea>
         </div>
         <div className="flex flex-wrap -mx-3 mb-2 ml-2 mr-2 w-full justify-around">
@@ -47,6 +95,7 @@ function Work() {
               id="year-start"
               type="text"
               placeholder="2016"
+              onChange={handleInputChange}
             ></input>
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -61,6 +110,7 @@ function Work() {
               id="year-end"
               type="text"
               placeholder="2020"
+              onChange={handleInputChange}
             ></input>
           </div>
         </div>
