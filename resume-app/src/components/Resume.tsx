@@ -23,9 +23,9 @@ function Resume({
           <p className="text-2xl font-bold">
             {firstName} {lastName}
           </p>
-          <p>{email}</p>
-          <p>{phone}</p>
-          <p>
+          <p className="text-xs">{email}</p>
+          <p className="text-xs">{phone}</p>
+          <p className="text-xs">
             {city}&nbsp;{state}&nbsp;{zip}
           </p>
         </div>
@@ -38,7 +38,7 @@ function Resume({
               <p>School</p>
               <p className="text-xs pl-3">Major</p>
             </div>
-            <p>Years Attended</p>
+            <p className="flex flex-end">Years Attended</p>
           </div>
         </div>
         <div className="flex w-full h-4/6 flex-col p-2">
@@ -51,7 +51,7 @@ function Resume({
               <p className="text-sm">Postition</p>
               <p className="text-xs pl-3">Details</p>
             </div>
-            <p>Years Worked</p>
+            <p className="flex justify-end w-[40%]">Years Worked</p>
           </div>
         </div>
       </div>
