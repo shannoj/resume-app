@@ -8,7 +8,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Work from "./components/WorkInfo";
 import General from "./components/GeneralInfo";
-import Education from "./components/EducationInfo";
+import EducationInfo, { EducationFormData } from "./components/EducationInfo";
+
+const handleEducationFormSubmit = (formData: EducationFormData) => {
+  // Use the form data in your app
+  console.log("Form data received in parent component:", formData);
+  // Add your logic to use the form data as needed
+};
 
 export default function App() {
   return (
@@ -24,7 +30,11 @@ export default function App() {
           </Dropdown>
           <Dropdown
             title="Education"
-            children2={<Education></Education>}
+            children2={
+              <EducationInfo
+                onFormSubmit={handleEducationFormSubmit}
+              ></EducationInfo>
+            }
             height={4 / 5}
           >
             {<FontAwesomeIcon icon={faUserGraduate}></FontAwesomeIcon>}

@@ -1,7 +1,16 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 
-function Education() {
-  const [formData, setFormData] = useState({
+interface EducationProps {
+  onFormSubmit: (formData: EducationFormData) => void;
+}
+
+export interface EducationFormData {
+  university: string;
+  major: string;
+}
+
+function EducationInfo({ onFormSubmit }: EducationProps) {
+  const [formData, setFormData] = useState<EducationFormData>({
     university: "",
     major: "",
   });
@@ -18,8 +27,7 @@ function Education() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log("Form submitted:", formData);
+    onFormSubmit(formData);
   };
 
   return (
@@ -113,4 +121,4 @@ function Education() {
   );
 }
 
-export default Education;
+export default EducationInfo;
