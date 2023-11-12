@@ -3,8 +3,19 @@ interface Props {
   lastName: string;
   email: string;
   phone: string;
+  city: string;
+  state: string;
+  zip: string;
 }
-function Resume({ firstName, lastName, email, phone }: Props) {
+function Resume({
+  firstName,
+  lastName,
+  email,
+  phone,
+  city,
+  state,
+  zip,
+}: Props) {
   return (
     <>
       <div className="flex flex-col justify-start items-center h-[95%] w-2/3 bg-white">
@@ -14,7 +25,9 @@ function Resume({ firstName, lastName, email, phone }: Props) {
           </p>
           <p>{email}</p>
           <p>{phone}</p>
-          <p>address</p>
+          <p>
+            {city}&nbsp;{state}&nbsp;{zip}
+          </p>
         </div>
         <div className="flex w-full h-1/6 flex-col p-2">
           <div className="flex felx-row w-full justify-start h-1/6 px-4 mb-4">

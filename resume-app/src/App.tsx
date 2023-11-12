@@ -70,6 +70,9 @@ export default function App() {
             }
             email={GeneralList.length > 0 ? GeneralList[0].email : ""}
             phone={GeneralList.length > 0 ? GeneralList[0].phone : ""}
+            city={GeneralList.length > 0 ? GeneralList[0].city : ""}
+            state={GeneralList.length > 0 ? GeneralList[0].state : ""}
+            zip={GeneralList.length > 0 ? GeneralList[0].zip : ""}
           ></Resume>
         </div>
       </div>

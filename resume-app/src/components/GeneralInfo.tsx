@@ -9,6 +9,9 @@ export interface GeneralFormData {
   phone: string;
   inlinefirstname: string;
   inlinelastname: string;
+  city: string;
+  state: string;
+  zip: string;
 }
 
 function General({ onFormSubmit }: GeneralProps) {
@@ -17,6 +20,9 @@ function General({ onFormSubmit }: GeneralProps) {
     phone: "",
     inlinefirstname: "",
     inlinelastname: "",
+    city: "",
+    state: "",
+    zip: "",
   });
 
   const handleInputChange = (
@@ -120,13 +126,13 @@ function General({ onFormSubmit }: GeneralProps) {
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-city"
+              htmlFor="city"
             >
               City
             </label>
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="grid-city"
+              id="city"
               type="text"
               placeholder="Albuquerque"
               onChange={handleInputChange}
@@ -135,14 +141,14 @@ function General({ onFormSubmit }: GeneralProps) {
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-state"
+              htmlFor="state"
             >
               State
             </label>
             <div className="relative flex items-center justify-between">
               <select
                 className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                id="grid-state"
+                id="state"
                 onChange={handleInputChange}
               >
                 <option value="-">-</option>
@@ -212,13 +218,13 @@ function General({ onFormSubmit }: GeneralProps) {
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-zip"
+              htmlFor="zip"
             >
               Zip
             </label>
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="grid-zip"
+              id="zip"
               type="text"
               placeholder="90210"
               onChange={handleInputChange}
