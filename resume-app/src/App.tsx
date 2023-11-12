@@ -74,6 +74,7 @@ export default function App() {
             state={GeneralList.length > 0 ? GeneralList[0].state : ""}
             zip={GeneralList.length > 0 ? GeneralList[0].zip : ""}
             educationList={EducationList}
+            workList={WorkList}
           ></Resume>
         </div>
       </div>

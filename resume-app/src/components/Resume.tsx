@@ -5,6 +5,14 @@ interface Education {
   yearended: string;
 }
 
+interface WorkExperience {
+  company: string;
+  position: string;
+  details: string;
+  yearstart: string;
+  yearend: string;
+}
+
 interface Props {
   firstName: string;
   lastName: string;
@@ -14,6 +22,7 @@ interface Props {
   state: string;
   zip: string;
   educationList: Education[];
+  workList: WorkExperience[];
 }
 function Resume({
   firstName,
@@ -24,6 +33,7 @@ function Resume({
   state,
   zip,
   educationList,
+  workList,
 }: Props) {
   return (
     <>
@@ -60,14 +70,20 @@ function Resume({
           <div className="flex felx-row w-full justify-start h-5 px-4 mb-2">
             <p className="font-bold">Work Experience:</p>
           </div>
-          <div className="flex flex-row items-start justify-start h-2/6 w-full mx-3 px-4">
-            <div className="flex flex-col h-full w-4/5 items-start justify-start">
-              <p>Company</p>
-              <p className="text-sm">Postition</p>
-              <p className="text-xs pl-3">Details</p>
+          {workList.map((work, index) => (
+            <div
+              key={index}
+              className="flex flex-row items-start justify-start h-2/6 w-full mx-3 px-4"
+            >
+              <div className="flex flex-col h-full w-4/5 items-start justify-start">
+                <p>{work.company}</p>
+                <p className="text-sm">{work.position}</p>
+                <p className="text-xs pl-3">{work.details}</p>
+              </div>
+              <p className="flex justify-end w-[40%]">{work.yearstart}</p>
+              <p className="flex justify-end w-[40%]">{work.yearend}</p>
             </div>
-            <p>Years Worked</p>
-          </div>
+          ))}
         </div>
       </div>
     </>
