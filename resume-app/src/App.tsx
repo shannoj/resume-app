@@ -9,6 +9,7 @@ import {
 import Work, { WorkFormData } from "./components/WorkInfo";
 import General, { GeneralFormData } from "./components/GeneralInfo";
 import EducationInfo, { EducationFormData } from "./components/EducationInfo";
+import Resume from "./components/resume";
 
 const handleEducationFormSubmit = (EducationData: EducationFormData) => {
   // Use the form data in your app
@@ -64,7 +65,9 @@ export default function App() {
             {<FontAwesomeIcon icon={faBriefcase}></FontAwesomeIcon>}
           </Dropdown>
         </div>
-        <div className="flex bg-slate-500 h-[95%] w-1/2 mr-5"></div>
+        <div className="flex flex-col justify-center items-center bg-slate-500 h-[95%] w-1/2 mr-5">
+          <Resume></Resume>
+        </div>
       </div>
     </>
   );
