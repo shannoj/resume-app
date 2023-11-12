@@ -1,3 +1,10 @@
+interface Education {
+  school: string;
+  major: string;
+  yearstarted: string;
+  yearended: string;
+}
+
 interface Props {
   firstName: string;
   lastName: string;
@@ -6,6 +13,7 @@ interface Props {
   city: string;
   state: string;
   zip: string;
+  educationList: Education[];
 }
 function Resume({
   firstName,
@@ -15,6 +23,7 @@ function Resume({
   city,
   state,
   zip,
+  educationList,
 }: Props) {
   return (
     <>
@@ -33,13 +42,19 @@ function Resume({
           <div className="flex felx-row w-full justify-start h-1/6 px-4 mb-4">
             <p className="font-bold">Education:</p>
           </div>
-          <div className="flex flex-row items-center justify-between h-2/6 w-full mx-3 px-4">
-            <div className="flex flex-col h-full w-1/5 items-start justify-between">
-              <p>School</p>
-              <p className="text-xs pl-3">Major</p>
+          {educationList.map((education, index) => (
+            <div
+              key={index}
+              className="flex flex-row items-center justify-between h-2/6 w-full mx-3 px-4"
+            >
+              <div className="flex flex-col h-full w-1/5 items-start justify-between">
+                <p>{education.school}</p>
+                <p className="text-xs pl-3">{education.major}</p>
+              </div>
+              <p className="flex flex-end">{education.yearstarted}</p>
+              <p className="flex flex-end">{education.yearended}</p>
             </div>
-            <p>Years Attended</p>
-          </div>
+          ))}
         </div>
         <div className="flex w-full h-4/6 flex-col p-2">
           <div className="flex felx-row w-full justify-start h-5 px-4 mb-2">
