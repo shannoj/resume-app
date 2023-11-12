@@ -1,11 +1,19 @@
-function Resume() {
+interface Props {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+}
+function Resume({ firstName, lastName, email, phone }: Props) {
   return (
     <>
-      <div className="flex flex-col justify-start items-center h-5/6 w-2/3 bg-white">
-        <div className="flex flex-col items-center justify-between h-1/5 w-5/6 border-solid border-black">
-          <p className="text-2xl font-bold">First Name, Last Name</p>
-          <p>email</p>
-          <p>phone</p>
+      <div className="flex flex-col justify-start items-center h-[95%] w-2/3 bg-white">
+        <div className="flex flex-col items-center justify-between h-[10%] w-5/6 border-solid border-black mb-12 mt-2">
+          <p className="text-2xl font-bold">
+            {firstName} {lastName}
+          </p>
+          <p>{email}</p>
+          <p>{phone}</p>
           <p>address</p>
         </div>
         <div className="flex w-full h-1/6 flex-col p-2">

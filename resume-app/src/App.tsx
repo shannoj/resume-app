@@ -1,4 +1,3 @@
-import "./App.css";
 import Dropdown from "./components/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,29 +9,25 @@ import Work, { WorkFormData } from "./components/WorkInfo";
 import General, { GeneralFormData } from "./components/GeneralInfo";
 import EducationInfo, { EducationFormData } from "./components/EducationInfo";
 import Resume from "./components/resume";
-
-const handleEducationFormSubmit = (EducationData: EducationFormData) => {
-  // Use the form data in your app
-  console.log(
-    "Education Form data received in parent component:",
-    EducationData
-  );
-  // Add your logic to use the form data as needed
-};
-
-const handleGeneralFormSubmit = (GeneralData: GeneralFormData) => {
-  // Use the form data in your app
-  console.log("General Form data received in parent component:", GeneralData);
-  // Add your logic to use the form data as needed
-};
-
-const handleWorkFormSubmit = (WorkData: WorkFormData) => {
-  // Use the form data in your app
-  console.log("Work Form data received in parent component:", WorkData);
-  // Add your logic to use the form data as needed
-};
+import { useState } from "react";
 
 export default function App() {
+  const [EducationList, setEducationList] = useState<EducationFormData[]>([]);
+  const [GeneralList, setGeneralList] = useState<GeneralFormData[]>([]);
+  const [WorkList, setWorkList] = useState<WorkFormData[]>([]);
+
+  const handleEducationFormSubmit = (EducationData: EducationFormData) => {
+    setEducationList((prevList) => [...prevList, EducationData]);
+  };
+
+  const handleGeneralFormSubmit = (GeneralData: GeneralFormData) => {
+    setGeneralList((prevList) => [...prevList, GeneralData]);
+  };
+
+  const handleWorkFormSubmit = (WorkData: WorkFormData) => {
+    setWorkList((prevList) => [...prevList, WorkData]);
+  };
+
   return (
     <>
       <div className="flex flex-row w-screen h-full justify-between items-center bg-gradient-to-r from-gray-700 via-gray-900 to-black">
@@ -66,7 +61,16 @@ export default function App() {
           </Dropdown>
         </div>
         <div className="flex flex-col justify-center items-center bg-slate-500 h-[95%] w-1/2 mr-5">
-          <Resume></Resume>
+          <Resume
+            firstName={
+              GeneralList.length > 0 ? GeneralList[0].inlinefirstname : ""
+            }
+            lastName={
+              GeneralList.length > 0 ? GeneralList[0].inlinelastname : ""
+            }
+            email={GeneralList.length > 0 ? GeneralList[0].email : ""}
+            phone={GeneralList.length > 0 ? GeneralList[0].phone : ""}
+          ></Resume>
         </div>
       </div>
     </>
