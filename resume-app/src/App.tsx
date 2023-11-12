@@ -7,12 +7,18 @@ import {
   faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
 import Work from "./components/WorkInfo";
-import General from "./components/GeneralInfo";
+import General, { GeneralFormData } from "./components/GeneralInfo";
 import EducationInfo, { EducationFormData } from "./components/EducationInfo";
 
 const handleEducationFormSubmit = (formData: EducationFormData) => {
   // Use the form data in your app
-  console.log("Form data received in parent component:", formData);
+  console.log("Education Form data received in parent component:", formData);
+  // Add your logic to use the form data as needed
+};
+
+const handleGeneralFormSubmit = (formData: GeneralFormData) => {
+  // Use the form data in your app
+  console.log("General Form data received in parent component:", formData);
   // Add your logic to use the form data as needed
 };
 
@@ -23,7 +29,9 @@ export default function App() {
         <div className="flex flex-col h-[90%] w-1/3 items-center justify-start overflow-auto mx-5 rounded-md shadow-md bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600">
           <Dropdown
             title="Background Information"
-            children2={<General></General>}
+            children2={
+              <General onFormSubmit={handleGeneralFormSubmit}></General>
+            }
             height={4 / 5}
           >
             {<FontAwesomeIcon icon={faUser}></FontAwesomeIcon>}

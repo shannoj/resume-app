@@ -1,7 +1,16 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 
-function General() {
-  const [formData, setFormData] = useState({
+interface GeneralProps {
+  onFormSubmit: (formData: GeneralFormData) => void;
+}
+
+export interface GeneralFormData {
+  email: string;
+  phone: string;
+}
+
+function General({ onFormSubmit }: GeneralProps) {
+  const [formData, setFormData] = useState<GeneralFormData>({
     email: "",
     phone: "",
   });
@@ -18,8 +27,7 @@ function General() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log("Form submitted:", formData);
+    onFormSubmit(formData);
   };
 
   return (
