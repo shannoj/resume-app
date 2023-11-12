@@ -6,19 +6,28 @@ import {
   faUser,
   faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
-import Work from "./components/WorkInfo";
+import Work, { WorkFormData } from "./components/WorkInfo";
 import General, { GeneralFormData } from "./components/GeneralInfo";
 import EducationInfo, { EducationFormData } from "./components/EducationInfo";
 
-const handleEducationFormSubmit = (formData: EducationFormData) => {
+const handleEducationFormSubmit = (EducationData: EducationFormData) => {
   // Use the form data in your app
-  console.log("Education Form data received in parent component:", formData);
+  console.log(
+    "Education Form data received in parent component:",
+    EducationData
+  );
   // Add your logic to use the form data as needed
 };
 
-const handleGeneralFormSubmit = (formData: GeneralFormData) => {
+const handleGeneralFormSubmit = (GeneralData: GeneralFormData) => {
   // Use the form data in your app
-  console.log("General Form data received in parent component:", formData);
+  console.log("General Form data received in parent component:", GeneralData);
+  // Add your logic to use the form data as needed
+};
+
+const handleWorkFormSubmit = (WorkData: WorkFormData) => {
+  // Use the form data in your app
+  console.log("Work Form data received in parent component:", WorkData);
   // Add your logic to use the form data as needed
 };
 
@@ -47,7 +56,11 @@ export default function App() {
           >
             {<FontAwesomeIcon icon={faUserGraduate}></FontAwesomeIcon>}
           </Dropdown>
-          <Dropdown title="Experience" children2={<Work></Work>} height={4 / 5}>
+          <Dropdown
+            title="Experience"
+            children2={<Work onFormSubmit={handleWorkFormSubmit}></Work>}
+            height={4 / 5}
+          >
             {<FontAwesomeIcon icon={faBriefcase}></FontAwesomeIcon>}
           </Dropdown>
         </div>

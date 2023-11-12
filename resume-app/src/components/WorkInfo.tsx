@@ -1,7 +1,17 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 
-function Work() {
-  const [formData, setFormData] = useState({
+interface WorkProps {
+  onFormSubmit: (formData: WorkFormData) => void;
+}
+
+export interface WorkFormData {
+  company: string;
+  position: string;
+  details: string;
+}
+
+function Work({ onFormSubmit }: WorkProps) {
+  const [formData, setFormData] = useState<WorkFormData>({
     company: "",
     position: "",
     details: "",
@@ -19,8 +29,7 @@ function Work() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log("Form submitted:", formData);
+    onFormSubmit(formData);
   };
 
   return (
