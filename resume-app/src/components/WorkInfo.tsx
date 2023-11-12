@@ -8,6 +8,8 @@ export interface WorkFormData {
   company: string;
   position: string;
   details: string;
+  yearstart: string;
+  yearend: string;
 }
 
 function Work({ onFormSubmit }: WorkProps) {
@@ -15,6 +17,8 @@ function Work({ onFormSubmit }: WorkProps) {
     company: "",
     position: "",
     details: "",
+    yearstart: "",
+    yearend: "",
   });
 
   const handleInputChange = (
@@ -95,13 +99,13 @@ function Work({ onFormSubmit }: WorkProps) {
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="year-start"
+              htmlFor="yearstart"
             >
               Year Start
             </label>
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="year-start"
+              id="yearstart"
               type="text"
               placeholder="2016"
               onChange={handleInputChange}
@@ -110,13 +114,13 @@ function Work({ onFormSubmit }: WorkProps) {
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="year-end"
+              htmlFor="yearend"
             >
               Year End
             </label>
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="year-end"
+              id="yearend"
               type="text"
               placeholder="2020"
               onChange={handleInputChange}

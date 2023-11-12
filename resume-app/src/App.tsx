@@ -73,6 +73,8 @@ export default function App() {
             city={GeneralList.length > 0 ? GeneralList[0].city : ""}
             state={GeneralList.length > 0 ? GeneralList[0].state : ""}
             zip={GeneralList.length > 0 ? GeneralList[0].zip : ""}
+            educationList={EducationList}
+            workList={WorkList}
           ></Resume>
         </div>
       </div>

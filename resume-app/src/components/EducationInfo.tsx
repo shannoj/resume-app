@@ -5,14 +5,18 @@ interface EducationProps {
 }
 
 export interface EducationFormData {
-  university: string;
+  school: string;
   major: string;
+  yearstarted: string;
+  yearended: string;
 }
 
 function EducationInfo({ onFormSubmit }: EducationProps) {
   const [formData, setFormData] = useState<EducationFormData>({
-    university: "",
+    school: "",
     major: "",
+    yearstarted: "",
+    yearended: "",
   });
 
   const handleInputChange = (
@@ -40,7 +44,7 @@ function EducationInfo({ onFormSubmit }: EducationProps) {
           <div className="md:w-1/3 mt-2 ml-2">
             <label
               className="block uppercase tracking-wide text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              htmlFor="university"
+              htmlFor="school"
             >
               University
             </label>
@@ -48,7 +52,7 @@ function EducationInfo({ onFormSubmit }: EducationProps) {
           <div className="md:w-2/3 mt-2 mr-2">
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="university"
+              id="school"
               type="text"
               placeholder="Harvard (lol)"
               onChange={handleInputChange}
@@ -78,13 +82,13 @@ function EducationInfo({ onFormSubmit }: EducationProps) {
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="year-start"
+              htmlFor="yearstarted"
             >
               Year Start
             </label>
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="year-start"
+              id="yearstarted"
               type="text"
               placeholder="2016"
               onChange={handleInputChange}
@@ -93,13 +97,13 @@ function EducationInfo({ onFormSubmit }: EducationProps) {
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="year-end"
+              htmlFor="yearended"
             >
               Year End
             </label>
             <input
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="year-end"
+              id="yearended"
               type="text"
               placeholder="2020"
               onChange={handleInputChange}
