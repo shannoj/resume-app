@@ -36,12 +36,6 @@ function EducationInfo({ onFormSubmit }: EducationProps) {
       ...prevData,
       [id]: value,
     }));
-
-    // Update the resume whenever an input field changes
-    onFormSubmit({
-      ...formData,
-      [id]: value,
-    });
   };
 
   const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
