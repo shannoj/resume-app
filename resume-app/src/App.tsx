@@ -8,7 +8,7 @@ import {
 import Work, { WorkFormData } from "./components/WorkInfo";
 import General, { GeneralFormData } from "./components/GeneralInfo";
 import EducationInfo, { EducationFormData } from "./components/EducationInfo";
-import Resume from "./components/resume";
+import Resume from "./components/Resume";
 import { useState } from "react";
 
 export default function App() {
