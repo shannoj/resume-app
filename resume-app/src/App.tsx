@@ -27,16 +27,11 @@ export default function App() {
   };
 
   const [EducationList, setEducationList] = useState<EducationFormData[]>([]);
-  //const [GeneralList, setGeneralList] = useState<GeneralFormData[]>([]);
   const [WorkList, setWorkList] = useState<WorkFormData[]>([]);
 
   const handleEducationFormSubmit = (EducationData: EducationFormData) => {
     setEducationList((prevList) => [...prevList, EducationData]);
   };
-
-  /* const handleGeneralFormSubmit = (GeneralData: GeneralFormData) => {
-    setGeneralList((prevList) => [...prevList, GeneralData]);
-  }; */
 
   const handleWorkFormSubmit = (WorkData: WorkFormData) => {
     setWorkList((prevList) => [...prevList, WorkData]);
