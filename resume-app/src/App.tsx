@@ -12,17 +12,31 @@ import Resume from "./components/Resume";
 import { useState } from "react";
 
 export default function App() {
+  const [generalFormData, setGeneralFormData] = useState<GeneralFormData>({
+    inlinefirstname: "",
+    inlinelastname: "",
+    city: "",
+    state: "",
+    zip: "",
+    email: "",
+    phone: "",
+  });
+
+  const handleGeneralFormSubmit = (data: GeneralFormData) => {
+    setGeneralFormData(data);
+  };
+
   const [EducationList, setEducationList] = useState<EducationFormData[]>([]);
-  const [GeneralList, setGeneralList] = useState<GeneralFormData[]>([]);
+  //const [GeneralList, setGeneralList] = useState<GeneralFormData[]>([]);
   const [WorkList, setWorkList] = useState<WorkFormData[]>([]);
 
   const handleEducationFormSubmit = (EducationData: EducationFormData) => {
     setEducationList((prevList) => [...prevList, EducationData]);
   };
 
-  const handleGeneralFormSubmit = (GeneralData: GeneralFormData) => {
+  /* const handleGeneralFormSubmit = (GeneralData: GeneralFormData) => {
     setGeneralList((prevList) => [...prevList, GeneralData]);
-  };
+  }; */
 
   const handleWorkFormSubmit = (WorkData: WorkFormData) => {
     setWorkList((prevList) => [...prevList, WorkData]);
@@ -62,17 +76,13 @@ export default function App() {
         </div>
         <div className="flex flex-col justify-center items-center bg-slate-500 h-[95%] w-1/2 mr-5">
           <Resume
-            firstName={
-              GeneralList.length > 0 ? GeneralList[0].inlinefirstname : ""
-            }
-            lastName={
-              GeneralList.length > 0 ? GeneralList[0].inlinelastname : ""
-            }
-            email={GeneralList.length > 0 ? GeneralList[0].email : ""}
-            phone={GeneralList.length > 0 ? GeneralList[0].phone : ""}
-            city={GeneralList.length > 0 ? GeneralList[0].city : ""}
-            state={GeneralList.length > 0 ? GeneralList[0].state : ""}
-            zip={GeneralList.length > 0 ? GeneralList[0].zip : ""}
+            firstName={generalFormData.inlinefirstname}
+            lastName={generalFormData.inlinelastname}
+            email={generalFormData.email}
+            phone={generalFormData.phone}
+            city={generalFormData.city}
+            state={generalFormData.state}
+            zip={generalFormData.zip}
             educationList={EducationList}
             workList={WorkList}
           ></Resume>

@@ -43,8 +43,7 @@ function EducationInfo({ onFormSubmit }: EducationProps) {
     setEditMode(true);
   };
 
-  const handleSaveChangesClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleSaveChangesClick = () => {
     setEditMode(false);
   };
 
@@ -52,9 +51,8 @@ function EducationInfo({ onFormSubmit }: EducationProps) {
     e.preventDefault();
     onFormSubmit(formData);
     setFormSubmitted(true);
-    if (formData !== initialFormDataRef.current) {
-      setEditMode(false);
-    }
+    setEditMode(false);
+    console.log("form submitted");
   };
 
   console.log("editMode before return:", editMode);
