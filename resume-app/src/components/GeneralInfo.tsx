@@ -26,6 +26,8 @@ function General({ onFormSubmit }: GeneralProps) {
   };
 
   const [formData, setFormData] = useState<GeneralFormData>(initialFormData);
+  const [editMode, setEditMode] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const initialFormDataRef = useRef<GeneralFormData>(initialFormData);
 
   useEffect(() => {
@@ -46,6 +48,17 @@ function General({ onFormSubmit }: GeneralProps) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onFormSubmit(formData);
+    setFormSubmitted(true);
+    setEditMode(false);
+  };
+
+  const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setEditMode(true);
+  };
+
+  const handleSaveChangesClick = () => {
+    setEditMode(false);
   };
 
   return (
@@ -64,13 +77,27 @@ function General({ onFormSubmit }: GeneralProps) {
             </label>
           </div>
           <div className="md:w-2/3 mt-2 mr-2">
-            <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="inlinefirstname"
-              type="text"
-              placeholder="Jane"
-              onChange={handleInputChange}
-            ></input>
+            {formSubmitted ? (
+              editMode ? (
+                <input
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="inlinefirstname"
+                  type="text"
+                  value={formData.inlinefirstname}
+                  onChange={handleInputChange}
+                ></input>
+              ) : (
+                <span>{formData.inlinefirstname}</span>
+              )
+            ) : (
+              <input
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                id="inlinefirstname"
+                type="text"
+                placeholder="Jane"
+                onChange={handleInputChange}
+              ></input>
+            )}
           </div>
         </div>
         <div className="md:flex md:items-center mb-6">
@@ -83,13 +110,27 @@ function General({ onFormSubmit }: GeneralProps) {
             </label>
           </div>
           <div className="md:w-2/3 mt-2 mr-2">
-            <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="inlinelastname"
-              type="text"
-              placeholder="Doe"
-              onChange={handleInputChange}
-            ></input>
+            {formSubmitted ? (
+              editMode ? (
+                <input
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="inlinelastname"
+                  type="text"
+                  value={formData.inlinelastname}
+                  onChange={handleInputChange}
+                ></input>
+              ) : (
+                <span>{formData.inlinelastname}</span>
+              )
+            ) : (
+              <input
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                id="inlinelastname"
+                type="text"
+                placeholder="Doe"
+                onChange={handleInputChange}
+              ></input>
+            )}
           </div>
         </div>
         <div className="md:flex md:items-center mb-6">
@@ -102,13 +143,27 @@ function General({ onFormSubmit }: GeneralProps) {
             </label>
           </div>
           <div className="md:w-2/3 mt-2 mr-2">
-            <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="email"
-              type="email"
-              placeholder="myemail@gmail.com"
-              onChange={handleInputChange}
-            ></input>
+            {formSubmitted ? (
+              editMode ? (
+                <input
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                ></input>
+              ) : (
+                <span>{formData.email}</span>
+              )
+            ) : (
+              <input
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                id="email"
+                type="email"
+                placeholder="myemail@gmail.com"
+                onChange={handleInputChange}
+              ></input>
+            )}
           </div>
         </div>
         <div className="md:flex md:items-center mb-6">
@@ -121,13 +176,27 @@ function General({ onFormSubmit }: GeneralProps) {
             </label>
           </div>
           <div className="md:w-2/3 mt-2 mr-2">
-            <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="phone"
-              type="tel"
-              placeholder="+12345678910"
-              onChange={handleInputChange}
-            ></input>
+            {formSubmitted ? (
+              editMode ? (
+                <input
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                ></input>
+              ) : (
+                <span>{formData.phone}</span>
+              )
+            ) : (
+              <input
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                id="phone"
+                type="tel"
+                placeholder="+12345678910"
+                onChange={handleInputChange}
+              ></input>
+            )}
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-2 ml-2 mr-2">
@@ -138,13 +207,27 @@ function General({ onFormSubmit }: GeneralProps) {
             >
               City
             </label>
-            <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="city"
-              type="text"
-              placeholder="Albuquerque"
-              onChange={handleInputChange}
-            ></input>
+            {formSubmitted ? (
+              editMode ? (
+                <input
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="city"
+                  type="text"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                ></input>
+              ) : (
+                <span>{formData.city}</span>
+              )
+            ) : (
+              <input
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                id="city"
+                type="text"
+                placeholder="Albuquerque"
+                onChange={handleInputChange}
+              ></input>
+            )}
           </div>
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
@@ -154,64 +237,130 @@ function General({ onFormSubmit }: GeneralProps) {
               State
             </label>
             <div className="relative flex items-center justify-between">
-              <select
-                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                id="state"
-                onChange={handleInputChange}
-              >
-                <option value="-">-</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="DC">District Of Columbia</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
-              </select>
+              {formSubmitted ? (
+                editMode ? (
+                  <select
+                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    id="state"
+                    value={formData.state}
+                    onChange={handleInputChange}
+                  >
+                    <option value="-">-</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District Of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                  </select>
+                ) : (
+                  <span>{formData.state}</span>
+                )
+              ) : (
+                <select
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="state"
+                  onChange={handleInputChange}
+                >
+                  <option value="-">-</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">District Of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+              )}
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
                   className="fill-current h-4 w-4"
@@ -230,23 +379,57 @@ function General({ onFormSubmit }: GeneralProps) {
             >
               Zip
             </label>
-            <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              id="zip"
-              type="text"
-              placeholder="90210"
-              onChange={handleInputChange}
-            ></input>
+            {formSubmitted ? (
+              editMode ? (
+                <input
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="zip"
+                  type="text"
+                  value={formData.zip}
+                  onChange={handleInputChange}
+                ></input>
+              ) : (
+                <span>{formData.zip}</span>
+              )
+            ) : (
+              <input
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                id="zip"
+                type="text"
+                placeholder="90210"
+                onChange={handleInputChange}
+              ></input>
+            )}
           </div>
         </div>
         <div className="md:flex md:items-center mb-2">
           <div className="md:w-full flex justify-center align-center">
-            <button
-              className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-              type="submit"
-            >
-              Save
-            </button>
+            {formSubmitted ? (
+              editMode ? (
+                <button
+                  className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                  type="submit"
+                  onClick={handleSaveChangesClick}
+                >
+                  Save Changes
+                </button>
+              ) : (
+                <button
+                  className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                  type="button"
+                  onClick={handleEditClick}
+                >
+                  Edit
+                </button>
+              )
+            ) : (
+              <button
+                className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                type="submit"
+              >
+                Save
+              </button>
+            )}
           </div>
         </div>
       </form>
