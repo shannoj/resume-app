@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent, useRef, useEffect } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 
 interface GeneralProps {
   onFormSubmit: (formData: GeneralFormData) => void;
@@ -28,11 +28,6 @@ function General({ onFormSubmit }: GeneralProps) {
   const [formData, setFormData] = useState<GeneralFormData>(initialFormData);
   const [editMode, setEditMode] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const initialFormDataRef = useRef<GeneralFormData>(initialFormData);
-
-  useEffect(() => {
-    initialFormDataRef.current = formData;
-  }, [formData]);
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
