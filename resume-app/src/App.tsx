@@ -10,9 +10,7 @@ import General, { GeneralFormData } from "./components/GeneralInfo";
 import EducationInfo, { EducationFormData } from "./components/EducationInfo";
 import Resume from "./components/Resume";
 import { useState } from "react";
-import EducationResumeBlock, {
-  Education,
-} from "./components/EducationResumeBlock";
+import EducationResumeBlock from "./components/EducationResumeBlock";
 
 export default function App() {
   const [generalFormData, setGeneralFormData] = useState<GeneralFormData>({
@@ -90,7 +88,8 @@ export default function App() {
             city={generalFormData.city}
             state={generalFormData.state}
             zip={generalFormData.zip}
-            EducationChild={
+            workList={WorkList}
+            educationChild={
               <EducationResumeBlock
                 school={educationFormData.school}
                 major={educationFormData.major}
@@ -98,7 +97,6 @@ export default function App() {
                 yearended={educationFormData.yearended}
               ></EducationResumeBlock>
             }
-            workList={WorkList}
           ></Resume>
         </div>
       </div>
