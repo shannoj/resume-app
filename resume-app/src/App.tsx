@@ -10,6 +10,9 @@ import General, { GeneralFormData } from "./components/GeneralInfo";
 import EducationInfo, { EducationFormData } from "./components/EducationInfo";
 import Resume from "./components/Resume";
 import { useState } from "react";
+import EducationResumeBlock, {
+  Education,
+} from "./components/EducationResumeBlock";
 
 export default function App() {
   const [generalFormData, setGeneralFormData] = useState<GeneralFormData>({
@@ -22,15 +25,24 @@ export default function App() {
     phone: "",
   });
 
+  const [educationFormData, setEducationFormData] = useState<EducationFormData>(
+    {
+      school: "",
+      major: "",
+      yearended: "",
+      yearstarted: "",
+    }
+  );
+
   const handleGeneralFormSubmit = (data: GeneralFormData) => {
     setGeneralFormData(data);
   };
 
-  const [EducationList, setEducationList] = useState<EducationFormData[]>([]);
+  //const [EducationList, setEducationList] = useState<EducationFormData[]>([]);
   const [WorkList, setWorkList] = useState<WorkFormData[]>([]);
 
   const handleEducationFormSubmit = (EducationData: EducationFormData) => {
-    setEducationList((prevList) => [...prevList, EducationData]);
+    setEducationFormData(EducationData);
   };
 
   const handleWorkFormSubmit = (WorkData: WorkFormData) => {
@@ -78,7 +90,14 @@ export default function App() {
             city={generalFormData.city}
             state={generalFormData.state}
             zip={generalFormData.zip}
-            educationList={EducationList}
+            EducationChild={
+              <EducationResumeBlock
+                school={educationFormData.school}
+                major={educationFormData.major}
+                yearstarted={educationFormData.yearstarted}
+                yearended={educationFormData.yearended}
+              ></EducationResumeBlock>
+            }
             workList={WorkList}
           ></Resume>
         </div>

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent, useEffect, useRef } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 
 interface EducationProps {
   onFormSubmit: (formData: EducationFormData) => void;
@@ -22,11 +22,6 @@ function EducationInfo({ onFormSubmit }: EducationProps) {
   const [formData, setFormData] = useState<EducationFormData>(initialFormData);
   const [editMode, setEditMode] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const initialFormDataRef = useRef<EducationFormData>(initialFormData);
-
-  useEffect(() => {
-    initialFormDataRef.current = formData;
-  }, [formData]);
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -36,6 +31,7 @@ function EducationInfo({ onFormSubmit }: EducationProps) {
       ...prevData,
       [id]: value,
     }));
+    onFormSubmit({ ...formData, [id]: value });
   };
 
   const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {

@@ -1,9 +1,4 @@
-interface Education {
-  school: string;
-  major: string;
-  yearstarted: string;
-  yearended: string;
-}
+import { ReactNode } from "react";
 
 interface WorkExperience {
   company: string;
@@ -21,7 +16,7 @@ interface Props {
   city: string;
   state: string;
   zip: string;
-  educationList: Education[];
+  EducationChild: ReactNode;
   workList: WorkExperience[];
 }
 
@@ -35,7 +30,7 @@ function Resume({
   city,
   state,
   zip,
-  educationList,
+  EducationChild,
   workList,
 }: Props) {
   return (
@@ -53,25 +48,7 @@ function Resume({
       </div>
 
       {/* Education section */}
-      <div className="flex w-full h-1/6 flex-col p-2">
-        <div className="flex felx-row w-full justify-start h-1/6 px-4 mb-4">
-          <p className="font-bold">Education:</p>
-        </div>
-        {educationList.map((education, index) => (
-          <div
-            key={index}
-            className="flex flex-row items-center justify-between h-2/6 w-full mx-3 px-4"
-          >
-            <div className="flex flex-col h-full w-1/5 items-start justify-between">
-              <p>{education.school}</p>
-              <p className="text-xs pl-3">{education.major}</p>
-            </div>
-            <p className="flex flex-end">{education.yearstarted}</p>
-            <p className="flex flex-end">{education.yearended}</p>
-          </div>
-        ))}
-      </div>
-
+      {EducationChild}
       {/* Work Experience section */}
       <div className="flex w-full h-4/6 flex-col p-2">
         <div className="flex felx-row w-full justify-start h-5 px-4 mb-2">
