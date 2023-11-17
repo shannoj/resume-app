@@ -36,11 +36,12 @@ export default function App() {
     setGeneralFormData(data);
   };
 
-  //const [EducationList, setEducationList] = useState<EducationFormData[]>([]);
+  const [EducationList, setEducationList] = useState<EducationFormData[]>([]);
   const [WorkList, setWorkList] = useState<WorkFormData[]>([]);
 
   const handleEducationFormSubmit = (EducationData: EducationFormData) => {
     setEducationFormData(EducationData);
+    setEducationList((prevList) => [...prevList, EducationData]);
   };
 
   const handleWorkFormSubmit = (WorkData: WorkFormData) => {
@@ -89,15 +90,14 @@ export default function App() {
             state={generalFormData.state}
             zip={generalFormData.zip}
             workList={WorkList}
-            educationChild={
-              <EducationResumeBlock
-                school={educationFormData.school}
-                major={educationFormData.major}
-                yearstarted={educationFormData.yearstarted}
-                yearended={educationFormData.yearended}
-              ></EducationResumeBlock>
-            }
-          ></Resume>
+          >
+            <EducationResumeBlock
+              school={educationFormData.school}
+              major={educationFormData.major}
+              yearstarted={educationFormData.yearstarted}
+              yearended={educationFormData.yearended}
+            ></EducationResumeBlock>
+          </Resume>
         </div>
       </div>
     </>

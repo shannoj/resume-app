@@ -16,7 +16,7 @@ interface Props {
   city: string;
   state: string;
   zip: string;
-  educationChild: ReactNode;
+  children: ReactNode;
   workList: WorkExperience[];
 }
 
@@ -31,7 +31,7 @@ function Resume({
   state,
   zip,
   workList,
-  educationChild,
+  children,
 }: Props) {
   return (
     <div className="flex flex-col justify-start items-center h-[95%] w-2/3 bg-white">
@@ -48,7 +48,7 @@ function Resume({
       </div>
 
       {/* Education section */}
-      {educationChild}
+      {children}
       {/* Work Experience section */}
       <div className="flex w-full h-4/6 flex-col p-2">
         <div className="flex felx-row w-full justify-start h-5 px-4 mb-2">
