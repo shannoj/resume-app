@@ -11,6 +11,7 @@ import EducationInfo, { EducationFormData } from "./components/EducationInfo";
 import Resume from "./components/Resume";
 import { useState } from "react";
 import EducationResumeBlock from "./components/EducationResumeBlock";
+import WorkResumeBlock from "./components/WorkResumeBlock";
 
 export default function App() {
   const [generalFormData, setGeneralFormData] = useState<GeneralFormData>({
@@ -32,6 +33,14 @@ export default function App() {
     }
   );
 
+  const [workFormData, setWorkFormData] = useState<WorkFormData>({
+    company: "",
+    position: "",
+    details: "",
+    yearstart: "",
+    yearend: "",
+  });
+
   const handleGeneralFormSubmit = (data: GeneralFormData) => {
     setGeneralFormData(data);
   };
@@ -45,6 +54,7 @@ export default function App() {
   };
 
   const handleWorkFormSubmit = (WorkData: WorkFormData) => {
+    setWorkFormData(WorkData);
     setWorkList((prevList) => [...prevList, WorkData]);
   };
 
@@ -89,7 +99,6 @@ export default function App() {
             city={generalFormData.city}
             state={generalFormData.state}
             zip={generalFormData.zip}
-            workList={WorkList}
           >
             <EducationResumeBlock
               school={educationFormData.school}
@@ -97,6 +106,13 @@ export default function App() {
               yearstarted={educationFormData.yearstarted}
               yearended={educationFormData.yearended}
             ></EducationResumeBlock>
+            <WorkResumeBlock
+              company={workFormData.company}
+              position={workFormData.position}
+              details={workFormData.details}
+              yearstart={workFormData.yearstart}
+              yearend={workFormData.yearend}
+            ></WorkResumeBlock>
           </Resume>
         </div>
       </div>

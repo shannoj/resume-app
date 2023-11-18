@@ -1,13 +1,5 @@
 import { ReactNode } from "react";
 
-interface WorkExperience {
-  company: string;
-  position: string;
-  details: string;
-  yearstart: string;
-  yearend: string;
-}
-
 interface Props {
   firstName: string;
   lastName: string;
@@ -17,7 +9,6 @@ interface Props {
   state: string;
   zip: string;
   children: ReactNode;
-  workList: WorkExperience[];
 }
 
 // ... (interface definitions)
@@ -30,7 +21,6 @@ function Resume({
   city,
   state,
   zip,
-  workList,
   children,
 }: Props) {
   return (
@@ -50,25 +40,6 @@ function Resume({
       {/* Education section */}
       {children}
       {/* Work Experience section */}
-      <div className="flex w-full h-4/6 flex-col p-2">
-        <div className="flex felx-row w-full justify-start h-5 px-4 mb-2">
-          <p className="font-bold">Work Experience:</p>
-        </div>
-        {workList.map((work, index) => (
-          <div
-            key={index}
-            className="flex flex-row items-start justify-start h-2/6 w-full mx-3 px-4"
-          >
-            <div className="flex flex-col h-full w-4/5 items-start justify-start">
-              <p>{work.company}</p>
-              <p className="text-sm">{work.position}</p>
-              <p className="text-xs pl-3">{work.details}</p>
-            </div>
-            <p className="flex justify-end w-[40%]">{work.yearstart}</p>
-            <p className="flex justify-end w-[40%]">{work.yearend}</p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
