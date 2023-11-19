@@ -1,7 +1,15 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 
 interface GeneralProps {
-  onFormSubmit: (formData: GeneralFormData) => void;
+  onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => void;
+  formData: GeneralFormData;
+  handleEditClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleSaveChangesClick: () => void;
+  editMode: boolean;
+  formSubmitted: boolean;
 }
 
 export interface GeneralFormData {
@@ -14,58 +22,25 @@ export interface GeneralFormData {
   zip: string;
 }
 
-function General({ onFormSubmit }: GeneralProps) {
-  const initialFormData: GeneralFormData = {
-    email: "",
-    phone: "",
-    inlinefirstname: "",
-    inlinelastname: "",
-    city: "",
-    state: "",
-    zip: "",
-  };
-
-  const [formData, setFormData] = useState<GeneralFormData>(initialFormData);
-  const [editMode, setEditMode] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
-    onFormSubmit({ ...formData, [id]: value });
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onFormSubmit(formData);
-    setFormSubmitted(true);
-    setEditMode(false);
-  };
-
-  const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setEditMode(true);
-  };
-
-  const handleSaveChangesClick = () => {
-    setEditMode(false);
-  };
-
+function General({
+  onFormSubmit,
+  handleInputChange,
+  formData,
+  handleEditClick,
+  handleSaveChangesClick,
+  editMode,
+  formSubmitted,
+}: GeneralProps) {
   return (
     <>
       <form
         className="flex w-full max-w-sm flex-col align-center justify-around"
-        onSubmit={handleSubmit}
+        onSubmit={onFormSubmit}
       >
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3 mt-2 ml-2">
             <label
-              className="block uppercase tracking-wide text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              className="general block uppercase tracking-wide text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4"
               htmlFor="inlinefirstname"
             >
               First Name
@@ -75,7 +50,7 @@ function General({ onFormSubmit }: GeneralProps) {
             {formSubmitted ? (
               editMode ? (
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inlinefirstname"
                   type="text"
                   value={formData.inlinefirstname}
@@ -86,7 +61,7 @@ function General({ onFormSubmit }: GeneralProps) {
               )
             ) : (
               <input
-                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="inlinefirstname"
                 type="text"
                 placeholder="Jane"
@@ -108,7 +83,7 @@ function General({ onFormSubmit }: GeneralProps) {
             {formSubmitted ? (
               editMode ? (
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="inlinelastname"
                   type="text"
                   value={formData.inlinelastname}
@@ -119,7 +94,7 @@ function General({ onFormSubmit }: GeneralProps) {
               )
             ) : (
               <input
-                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="inlinelastname"
                 type="text"
                 placeholder="Doe"
@@ -141,7 +116,7 @@ function General({ onFormSubmit }: GeneralProps) {
             {formSubmitted ? (
               editMode ? (
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="email"
                   type="email"
                   value={formData.email}
@@ -152,7 +127,7 @@ function General({ onFormSubmit }: GeneralProps) {
               )
             ) : (
               <input
-                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="email"
                 type="email"
                 placeholder="myemail@gmail.com"
@@ -174,7 +149,7 @@ function General({ onFormSubmit }: GeneralProps) {
             {formSubmitted ? (
               editMode ? (
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="phone"
                   type="tel"
                   value={formData.phone}
@@ -185,7 +160,7 @@ function General({ onFormSubmit }: GeneralProps) {
               )
             ) : (
               <input
-                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="phone"
                 type="tel"
                 placeholder="+12345678910"
@@ -205,7 +180,7 @@ function General({ onFormSubmit }: GeneralProps) {
             {formSubmitted ? (
               editMode ? (
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="city"
                   type="text"
                   value={formData.city}
@@ -216,7 +191,7 @@ function General({ onFormSubmit }: GeneralProps) {
               )
             ) : (
               <input
-                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="city"
                 type="text"
                 placeholder="Albuquerque"
@@ -235,7 +210,7 @@ function General({ onFormSubmit }: GeneralProps) {
               {formSubmitted ? (
                 editMode ? (
                   <select
-                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                     id="state"
                     value={formData.state}
                     onChange={handleInputChange}
@@ -298,7 +273,7 @@ function General({ onFormSubmit }: GeneralProps) {
                 )
               ) : (
                 <select
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="state"
                   onChange={handleInputChange}
                 >
@@ -377,7 +352,7 @@ function General({ onFormSubmit }: GeneralProps) {
             {formSubmitted ? (
               editMode ? (
                 <input
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                   id="zip"
                   type="text"
                   value={formData.zip}
@@ -388,7 +363,7 @@ function General({ onFormSubmit }: GeneralProps) {
               )
             ) : (
               <input
-                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="zip"
                 type="text"
                 placeholder="90210"

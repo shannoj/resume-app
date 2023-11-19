@@ -18,15 +18,26 @@ export default function App() {
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { id, value } = e.target;
-    console.log(e.target);
-    setWorkFormData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
+    if (e.target.className.includes("work")) {
+      setWorkFormData((prevData) => ({
+        ...prevData,
+        [id]: value,
+      }));
+    } else if (e.target.className.includes("education")) {
+      setEducationFormData((prevData) => ({
+        ...prevData,
+        [id]: value,
+      }));
+    } else if (e.target.className.includes("general")) {
+      setGeneralFormData((prevData) => ({
+        ...prevData,
+        [id]: value,
+      }));
+    }
   };
 
   const [editMode, setEditMode] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formsSubmitted, setFormSubmitted] = useState<any[]>([]);
 
   const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -64,8 +75,9 @@ export default function App() {
     yearend: "",
   });
 
-  const handleGeneralFormSubmit = (data: GeneralFormData) => {
-    setGeneralFormData(data);
+  const handleGeneralFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormSubmitted([...formsSubmitted, "general"]);
   };
 
   const handleEducationFormSubmit = (EducationData: EducationFormData) => {
@@ -74,7 +86,11 @@ export default function App() {
 
   const handleWorkFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setFormSubmitted([...formsSubmitted, "work"]);
+  };
+
+  const checkSubmitted = (name: string) => {
+    return formsSubmitted.includes(name);
   };
 
   return (
@@ -84,7 +100,15 @@ export default function App() {
           <Dropdown
             title="Background Information"
             children2={
-              <General onFormSubmit={handleGeneralFormSubmit}></General>
+              <General
+                onFormSubmit={handleGeneralFormSubmit}
+                handleInputChange={handleInputChange}
+                formData={generalFormData}
+                editMode={editMode}
+                formSubmitted={checkSubmitted("general")}
+                handleEditClick={handleEditClick}
+                handleSaveChangesClick={handleSaveChangesClick}
+              ></General>
             }
             height={4 / 5}
           >
@@ -109,7 +133,7 @@ export default function App() {
                 handleInputChange={handleInputChange}
                 formData={workFormData}
                 editMode={editMode}
-                formSubmitted={formSubmitted}
+                formSubmitted={checkSubmitted("work")}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
               ></Work>
