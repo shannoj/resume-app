@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 
 interface WorkProps {
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -29,34 +29,6 @@ function Work({
   editMode,
   formSubmitted,
 }: WorkProps) {
-  /*const [formData, setFormData] = useState<WorkFormData>({
-    company: "",
-    position: "",
-    details: "",
-    yearstart: "",
-    yearend: "",
-  }); 
-
-  const [editMode, setEditMode] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setEditMode(true);
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormSubmitted(true);
-    onFormSubmit(formData);
-  };
-
-  const handleSaveChangesClick = () => {
-    setEditMode(false);
-  };
-
-  */
-
   return (
     <>
       <form
