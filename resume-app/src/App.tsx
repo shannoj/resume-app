@@ -37,16 +37,8 @@ export default function App() {
   };
 
   const [editMode, setEditMode] = useState(false);
+
   const [formsSubmitted, setFormSubmitted] = useState<any[]>([]);
-
-  const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setEditMode(true);
-  };
-
-  const handleSaveChangesClick = () => {
-    setEditMode(false);
-  };
 
   const [generalFormData, setGeneralFormData] = useState<GeneralFormData>({
     inlinefirstname: "",
@@ -75,6 +67,41 @@ export default function App() {
     yearend: "",
   });
 
+  const [IsOpen, SetIsOpen] = useState<any[]>([]);
+
+  const ToggleDropdown = (e: React.MouseEvent<SVGSVGElement>) => {
+    const formElement = e.target as HTMLFormElement;
+    console.log(formElement.id);
+    if (formElement.id == "general-form") {
+      if (IsOpen.includes("general")) {
+        SetIsOpen(IsOpen.filter((id) => id !== "general"));
+      } else {
+        SetIsOpen([...IsOpen, "general"]);
+      }
+    } else if (formElement.id == "education-form") {
+      if (IsOpen.includes("education")) {
+        SetIsOpen(IsOpen.filter((id) => id !== "education"));
+      } else {
+        SetIsOpen([...IsOpen, "education"]);
+      }
+    } else if (formElement.id == "work-form") {
+      if (IsOpen.includes("work")) {
+        SetIsOpen(IsOpen.filter((id) => id !== "work"));
+      } else {
+        SetIsOpen([...IsOpen, "work"]);
+      }
+    }
+  };
+
+  const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setEditMode(true);
+  };
+
+  const handleSaveChangesClick = () => {
+    setEditMode(false);
+  };
+
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formElement = e.target as HTMLFormElement;
@@ -92,12 +119,17 @@ export default function App() {
     return formsSubmitted.includes(name);
   };
 
+  const checkIsOpen = (name: string) => {
+    return IsOpen.includes(name);
+  };
+
   return (
     <>
       <div className="flex flex-row w-screen h-full justify-between items-center bg-gradient-to-r from-gray-700 via-gray-900 to-black">
         <div className="flex flex-col h-[90%] w-1/3 items-center justify-start overflow-auto mx-5 rounded-md shadow-md bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600">
           <Dropdown
             title="Background Information"
+            Id="general-form"
             children2={
               <General
                 onFormSubmit={handleFormSubmit}
@@ -110,11 +142,14 @@ export default function App() {
               ></General>
             }
             height={4 / 5}
+            ToggleDropdown={ToggleDropdown}
+            IsOpen={checkIsOpen("general")}
           >
             {<FontAwesomeIcon icon={faUser}></FontAwesomeIcon>}
           </Dropdown>
           <Dropdown
             title="Education"
+            Id="education-form"
             children2={
               <EducationInfo
                 onFormSubmit={handleFormSubmit}
@@ -127,11 +162,14 @@ export default function App() {
               ></EducationInfo>
             }
             height={4 / 5}
+            ToggleDropdown={ToggleDropdown}
+            IsOpen={checkIsOpen("education")}
           >
             {<FontAwesomeIcon icon={faUserGraduate}></FontAwesomeIcon>}
           </Dropdown>
           <Dropdown
             title="Experience"
+            Id="work-form"
             children2={
               <Work
                 onFormSubmit={handleFormSubmit}
@@ -144,6 +182,8 @@ export default function App() {
               ></Work>
             }
             height={4 / 5}
+            ToggleDropdown={ToggleDropdown}
+            IsOpen={checkIsOpen("work")}
           >
             {<FontAwesomeIcon icon={faBriefcase}></FontAwesomeIcon>}
           </Dropdown>

@@ -1,22 +1,27 @@
 import { ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 
 interface Props {
   title: string;
   children: ReactNode;
   children2: ReactNode;
   height: number;
+  IsOpen: boolean;
+  Id: string;
+  ToggleDropdown: (e: React.MouseEvent<SVGSVGElement>) => void;
 }
 
-function Dropdown({ title, children, children2, height }: Props) {
-  const [IsOpen, SetIsOpen] = useState(false);
-
-  const ToggleDropdown = () => {
-    SetIsOpen(!IsOpen);
-  };
-
+function Dropdown({
+  title,
+  children,
+  children2,
+  height,
+  IsOpen,
+  Id,
+  ToggleDropdown,
+}: Props) {
   return (
     <>
       <div className="flex flex-row justify-between align-center w-4/5 min-h-[50px] max-h-[50px] bg-gradient-to-r from-gray-100 to-gray-300 rounded-md mt-6 mb-2 shadow-sm hover:shadow-lg">
@@ -34,12 +39,14 @@ function Dropdown({ title, children, children2, height }: Props) {
               icon={faAngleDown}
               className="cursor-pointer"
               onClick={ToggleDropdown}
+              id={Id}
             ></FontAwesomeIcon>
           ) : (
             <FontAwesomeIcon
               icon={faAngleUp}
               className="cursor-pointer"
               onClick={ToggleDropdown}
+              id={Id}
             ></FontAwesomeIcon>
           )}
         </div>
