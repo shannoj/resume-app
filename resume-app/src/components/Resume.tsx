@@ -37,9 +37,8 @@ function Resume({
         </p>
       </div>
 
-      {/* Education section */}
+      {/* Education section,  Work Experience section  */}
       {children}
-      {/* Work Experience section */}
     </div>
   );
 }
