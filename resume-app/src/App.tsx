@@ -9,11 +9,34 @@ import Work, { WorkFormData } from "./components/WorkInfo";
 import General, { GeneralFormData } from "./components/GeneralInfo";
 import EducationInfo, { EducationFormData } from "./components/EducationInfo";
 import Resume from "./components/Resume";
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import EducationResumeBlock from "./components/EducationResumeBlock";
 import WorkResumeBlock from "./components/WorkResumeBlock";
 
 export default function App() {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    console.log(e.target);
+    setWorkFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const [editMode, setEditMode] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setEditMode(true);
+  };
+
+  const handleSaveChangesClick = () => {
+    setEditMode(false);
+  };
+
   const [generalFormData, setGeneralFormData] = useState<GeneralFormData>({
     inlinefirstname: "",
     inlinelastname: "",
@@ -45,17 +68,13 @@ export default function App() {
     setGeneralFormData(data);
   };
 
-  const [EducationList, setEducationList] = useState<EducationFormData[]>([]);
-  const [WorkList, setWorkList] = useState<WorkFormData[]>([]);
-
   const handleEducationFormSubmit = (EducationData: EducationFormData) => {
     setEducationFormData(EducationData);
-    setEducationList((prevList) => [...prevList, EducationData]);
   };
 
-  const handleWorkFormSubmit = (WorkData: WorkFormData) => {
-    setWorkFormData(WorkData);
-    setWorkList((prevList) => [...prevList, WorkData]);
+  const handleWorkFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormSubmitted(true);
   };
 
   return (
@@ -84,7 +103,17 @@ export default function App() {
           </Dropdown>
           <Dropdown
             title="Experience"
-            children2={<Work onFormSubmit={handleWorkFormSubmit}></Work>}
+            children2={
+              <Work
+                onFormSubmit={handleWorkFormSubmit}
+                handleInputChange={handleInputChange}
+                formData={workFormData}
+                editMode={editMode}
+                formSubmitted={formSubmitted}
+                handleEditClick={handleEditClick}
+                handleSaveChangesClick={handleSaveChangesClick}
+              ></Work>
+            }
             height={4 / 5}
           >
             {<FontAwesomeIcon icon={faBriefcase}></FontAwesomeIcon>}

@@ -15,7 +15,6 @@ function Dropdown({ title, children, children2, height }: Props) {
 
   const ToggleDropdown = () => {
     SetIsOpen(!IsOpen);
-    console.log("click");
   };
 
   return (

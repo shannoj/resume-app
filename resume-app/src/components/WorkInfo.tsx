@@ -1,7 +1,15 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 
 interface WorkProps {
-  onFormSubmit: (formData: WorkFormData) => void;
+  onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => void;
+  formData: WorkFormData;
+  handleEditClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleSaveChangesClick: () => void;
+  editMode: boolean;
+  formSubmitted: boolean;
 }
 
 export interface WorkFormData {
@@ -12,28 +20,25 @@ export interface WorkFormData {
   yearend: string;
 }
 
-function Work({ onFormSubmit }: WorkProps) {
-  const [formData, setFormData] = useState<WorkFormData>({
+function Work({
+  onFormSubmit,
+  handleInputChange,
+  formData,
+  handleEditClick,
+  handleSaveChangesClick,
+  editMode,
+  formSubmitted,
+}: WorkProps) {
+  /*const [formData, setFormData] = useState<WorkFormData>({
     company: "",
     position: "",
     details: "",
     yearstart: "",
     yearend: "",
-  });
+  }); 
 
   const [editMode, setEditMode] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
-    onFormSubmit({ ...formData, [id]: value });
-  };
 
   const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -50,11 +55,13 @@ function Work({ onFormSubmit }: WorkProps) {
     setEditMode(false);
   };
 
+  */
+
   return (
     <>
       <form
         className="flex w-full max-w-sm flex-col align-center justify-start"
-        onSubmit={handleSubmit}
+        onSubmit={onFormSubmit}
       >
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3 mt-2 ml-2">
