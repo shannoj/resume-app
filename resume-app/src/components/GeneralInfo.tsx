@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 
 interface GeneralProps {
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;

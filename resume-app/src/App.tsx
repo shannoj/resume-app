@@ -80,8 +80,9 @@ export default function App() {
     setFormSubmitted([...formsSubmitted, "general"]);
   };
 
-  const handleEducationFormSubmit = (EducationData: EducationFormData) => {
-    setEducationFormData(EducationData);
+  const handleEducationFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormSubmitted([...formsSubmitted, "education"]);
   };
 
   const handleWorkFormSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -119,6 +120,12 @@ export default function App() {
             children2={
               <EducationInfo
                 onFormSubmit={handleEducationFormSubmit}
+                handleInputChange={handleInputChange}
+                formData={educationFormData}
+                editMode={editMode}
+                formSubmitted={checkSubmitted("education")}
+                handleEditClick={handleEditClick}
+                handleSaveChangesClick={handleSaveChangesClick}
               ></EducationInfo>
             }
             height={4 / 5}
