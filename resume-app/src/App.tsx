@@ -75,19 +75,17 @@ export default function App() {
     yearend: "",
   });
 
-  const handleGeneralFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormSubmitted([...formsSubmitted, "general"]);
-  };
+    const formElement = e.target as HTMLFormElement;
 
-  const handleEducationFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormSubmitted([...formsSubmitted, "education"]);
-  };
-
-  const handleWorkFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormSubmitted([...formsSubmitted, "work"]);
+    if (formElement.id == "general-form") {
+      setFormSubmitted([...formsSubmitted, "general"]);
+    } else if (formElement.id == "education-form") {
+      setFormSubmitted([...formsSubmitted, "education"]);
+    } else if (formElement.id == "work-form") {
+      setFormSubmitted([...formsSubmitted, "work"]);
+    }
   };
 
   const checkSubmitted = (name: string) => {
@@ -102,7 +100,7 @@ export default function App() {
             title="Background Information"
             children2={
               <General
-                onFormSubmit={handleGeneralFormSubmit}
+                onFormSubmit={handleFormSubmit}
                 handleInputChange={handleInputChange}
                 formData={generalFormData}
                 editMode={editMode}
@@ -119,7 +117,7 @@ export default function App() {
             title="Education"
             children2={
               <EducationInfo
-                onFormSubmit={handleEducationFormSubmit}
+                onFormSubmit={handleFormSubmit}
                 handleInputChange={handleInputChange}
                 formData={educationFormData}
                 editMode={editMode}
@@ -136,7 +134,7 @@ export default function App() {
             title="Experience"
             children2={
               <Work
-                onFormSubmit={handleWorkFormSubmit}
+                onFormSubmit={handleFormSubmit}
                 handleInputChange={handleInputChange}
                 formData={workFormData}
                 editMode={editMode}
