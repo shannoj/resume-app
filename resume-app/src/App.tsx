@@ -124,6 +124,38 @@ export default function App() {
     return IsOpen.includes(name);
   };
 
+  const [educationList, setEducationList] = useState<any[]>([
+    <EducationInfo
+      onFormSubmit={handleFormSubmit}
+      handleInputChange={handleInputChange}
+      formData={educationFormData}
+      editMode={editMode}
+      formSubmitted={checkSubmitted("education")}
+      handleEditClick={handleEditClick}
+      handleSaveChangesClick={handleSaveChangesClick}
+      height={4 / 5}
+      key={0}
+    ></EducationInfo>,
+  ]);
+
+  const handleAddButtonClick = () => {
+    setEducationList([
+      ...educationList,
+      <EducationInfo
+        onFormSubmit={handleFormSubmit}
+        handleInputChange={handleInputChange}
+        formData={educationFormData}
+        editMode={editMode}
+        formSubmitted={checkSubmitted("education")}
+        handleEditClick={handleEditClick}
+        handleSaveChangesClick={handleSaveChangesClick}
+        height={4 / 5}
+        key={educationList.length}
+      ></EducationInfo>,
+    ]);
+    console.log("hello clicked add button");
+  };
+
   return (
     <>
       <div className="flex flex-row w-screen h-full justify-between items-center bg-gradient-to-r from-gray-700 via-gray-900 to-black">
@@ -140,9 +172,12 @@ export default function App() {
                 formSubmitted={checkSubmitted("general")}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
+                height={4 / 5}
               ></General>
             }
-            children3={<AddButton></AddButton>}
+            children3={
+              <AddButton addButtonClick={handleAddButtonClick}></AddButton>
+            }
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
             IsOpen={checkIsOpen("general")}
@@ -152,18 +187,12 @@ export default function App() {
           <Dropdown
             title="Education"
             Id="education-form"
-            children2={
-              <EducationInfo
-                onFormSubmit={handleFormSubmit}
-                handleInputChange={handleInputChange}
-                formData={educationFormData}
-                editMode={editMode}
-                formSubmitted={checkSubmitted("education")}
-                handleEditClick={handleEditClick}
-                handleSaveChangesClick={handleSaveChangesClick}
-              ></EducationInfo>
+            children2={educationList.map((educations) => (
+              <>{educations}</>
+            ))}
+            children3={
+              <AddButton addButtonClick={handleAddButtonClick}></AddButton>
             }
-            children3={<AddButton></AddButton>}
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
             IsOpen={checkIsOpen("education")}
@@ -182,9 +211,12 @@ export default function App() {
                 formSubmitted={checkSubmitted("work")}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
+                height={4 / 5}
               ></Work>
             }
-            children3={<AddButton></AddButton>}
+            children3={
+              <AddButton addButtonClick={handleAddButtonClick}></AddButton>
+            }
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
             IsOpen={checkIsOpen("work")}
