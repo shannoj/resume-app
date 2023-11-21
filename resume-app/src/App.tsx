@@ -9,7 +9,7 @@ import Work, { WorkFormData } from "./components/WorkInfo";
 import General, { GeneralFormData } from "./components/GeneralInfo";
 import EducationInfo, { EducationFormData } from "./components/EducationInfo";
 import Resume from "./components/Resume";
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, ReactNode } from "react";
 import EducationResumeBlock from "./components/EducationResumeBlock";
 import WorkResumeBlock from "./components/WorkResumeBlock";
 import AddButton from "./components/AddButton";
@@ -124,7 +124,7 @@ export default function App() {
     return IsOpen.includes(name);
   };
 
-  const [educationList, setEducationList] = useState<any[]>([
+  const [educationList, setEducationList] = useState<ReactNode[]>([
     <EducationInfo
       onFormSubmit={handleFormSubmit}
       handleInputChange={handleInputChange}
@@ -134,7 +134,6 @@ export default function App() {
       handleEditClick={handleEditClick}
       handleSaveChangesClick={handleSaveChangesClick}
       height={4 / 5}
-      key={0}
     ></EducationInfo>,
   ]);
 
@@ -146,14 +145,13 @@ export default function App() {
         handleInputChange={handleInputChange}
         formData={educationFormData}
         editMode={editMode}
-        formSubmitted={checkSubmitted("education")}
+        formSubmitted={false}
         handleEditClick={handleEditClick}
         handleSaveChangesClick={handleSaveChangesClick}
         height={4 / 5}
-        key={educationList.length}
       ></EducationInfo>,
     ]);
-    console.log("hello clicked add button");
+    console.log(educationList.length);
   };
 
   return (
@@ -187,8 +185,13 @@ export default function App() {
           <Dropdown
             title="Education"
             Id="education-form"
-            children2={educationList.map((educations) => (
-              <>{educations}</>
+            children2={educationList.map((educations, index) => (
+              <ul
+                key={index}
+                className="flex justify-center items-center min-h-[40%] min-w-[100%] my-8"
+              >
+                {educations}
+              </ul>
             ))}
             children3={
               <AddButton addButtonClick={handleAddButtonClick}></AddButton>
