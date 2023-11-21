@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
-import { useState, MouseEvent } from "react";
 
 interface Props {
   title: string;
   children: ReactNode;
   children2: ReactNode;
+  children3: ReactNode;
   height: number;
   IsOpen: boolean;
   Id: string;
@@ -17,6 +17,7 @@ function Dropdown({
   title,
   children,
   children2,
+  children3,
   height,
   IsOpen,
   Id,
@@ -52,11 +53,22 @@ function Dropdown({
         </div>
       </div>
       {IsOpen && (
-        <div
-          className={`flex flex-row justify-center min-h-${height} max-h-${height} align-center w-4/5 bg-gradient-to-r from-gray-100 to-gray-300 rounded-md mt-1 mb-2 shadow-sm hover:shadow-lg`}
-        >
-          {children2}
-        </div>
+        <>
+          <div
+            className={`flex flex-row justify-center min-h-${height} max-h-${height} align-center w-4/5 bg-gradient-to-r from-gray-100 to-gray-300 rounded-md mt-1 mb-2 shadow-sm hover:shadow-lg`}
+          >
+            {children2}
+          </div>
+          <div
+            className={`flex flex-row justify-center min-h-${
+              height / 5
+            } max-h-${
+              height / 5
+            } align-center w-4/5 bg-gradient-to-r from-gray-100 to-gray-300 rounded-md mt-1 mb-2 shadow-sm hover:shadow-lg`}
+          >
+            {children3}
+          </div>
+        </>
       )}
     </>
   );

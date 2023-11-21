@@ -12,6 +12,7 @@ import Resume from "./components/Resume";
 import { useState, ChangeEvent, FormEvent } from "react";
 import EducationResumeBlock from "./components/EducationResumeBlock";
 import WorkResumeBlock from "./components/WorkResumeBlock";
+import AddButton from "./components/AddButton";
 
 export default function App() {
   const handleInputChange = (
@@ -141,6 +142,7 @@ export default function App() {
                 handleSaveChangesClick={handleSaveChangesClick}
               ></General>
             }
+            children3={<AddButton></AddButton>}
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
             IsOpen={checkIsOpen("general")}
@@ -161,6 +163,7 @@ export default function App() {
                 handleSaveChangesClick={handleSaveChangesClick}
               ></EducationInfo>
             }
+            children3={<AddButton></AddButton>}
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
             IsOpen={checkIsOpen("education")}
@@ -181,6 +184,7 @@ export default function App() {
                 handleSaveChangesClick={handleSaveChangesClick}
               ></Work>
             }
+            children3={<AddButton></AddButton>}
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
             IsOpen={checkIsOpen("work")}
