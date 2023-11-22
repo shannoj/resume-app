@@ -9,12 +9,14 @@ import Work, { WorkFormData } from "./components/WorkInfo";
 import General, { GeneralFormData } from "./components/GeneralInfo";
 import EducationInfo, { EducationFormData } from "./components/EducationInfo";
 import Resume from "./components/Resume";
-import { useState, ChangeEvent, FormEvent, ReactNode } from "react";
+import { useState, ChangeEvent, FormEvent, ReactNode, useId } from "react";
 import EducationResumeBlock from "./components/EducationResumeBlock";
 import WorkResumeBlock from "./components/WorkResumeBlock";
 import AddButton from "./components/AddButton";
 
 export default function App() {
+  const [educationFormIds, setEducationFormIds] = useState<string[]>([]);
+
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -103,21 +105,24 @@ export default function App() {
     setEditMode(false);
   };
 
+  const checkSubmitted = (name: string) => {
+    return formsSubmitted.includes(name);
+  };
+
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formElement = e.target as HTMLFormElement;
 
     if (formElement.id == "general-form") {
       setFormSubmitted([...formsSubmitted, "general"]);
-    } else if (formElement.id == "education-form") {
-      setFormSubmitted([...formsSubmitted, "education"]);
+    } else if (formElement.id.startsWith("education-form")) {
+      const originalId = educationFormIds.find((id) =>
+        formElement.id.endsWith(id)
+      );
+      setFormSubmitted([...formsSubmitted, originalId]);
     } else if (formElement.id == "work-form") {
       setFormSubmitted([...formsSubmitted, "work"]);
     }
-  };
-
-  const checkSubmitted = (name: string) => {
-    return formsSubmitted.includes(name);
   };
 
   const checkIsOpen = (name: string) => {
@@ -130,28 +135,35 @@ export default function App() {
       handleInputChange={handleInputChange}
       formData={educationFormData}
       editMode={editMode}
-      formSubmitted={checkSubmitted("education")}
+      formSubmitted={checkSubmitted("education-form-zero")}
       handleEditClick={handleEditClick}
       handleSaveChangesClick={handleSaveChangesClick}
       height={4 / 5}
+      key={0}
+      id={"education-form-zero"}
     ></EducationInfo>,
   ]);
 
   const handleAddButtonClick = () => {
-    setEducationList([
-      ...educationList,
+    const newId = `education-form-${educationFormIds.length + 1}`;
+    setEducationFormIds((prevIds) => [...prevIds, newId]);
+
+    setEducationList((prevList) => [
+      ...prevList,
       <EducationInfo
+        key={newId}
+        id={newId}
         onFormSubmit={handleFormSubmit}
         handleInputChange={handleInputChange}
         formData={educationFormData}
         editMode={editMode}
-        formSubmitted={false}
+        formSubmitted={checkSubmitted(newId)}
         handleEditClick={handleEditClick}
         handleSaveChangesClick={handleSaveChangesClick}
         height={4 / 5}
       ></EducationInfo>,
     ]);
-    console.log(educationList.length);
+    console.log(formsSubmitted);
   };
 
   return (

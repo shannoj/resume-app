@@ -11,6 +11,7 @@ interface EducationProps {
   editMode: boolean;
   formSubmitted: boolean;
   height: number;
+  id: string;
 }
 
 export interface EducationFormData {
@@ -29,6 +30,7 @@ function EducationInfo({
   editMode,
   formSubmitted,
   height,
+  id,
 }: EducationProps) {
   return (
     <>
@@ -37,7 +39,7 @@ function EducationInfo({
       >
         <form
           className="flex w-full max-w-sm flex-col align-center justify-start"
-          id="education-form"
+          id={id}
           onSubmit={onFormSubmit}
         >
           <div className="md:flex md:items-center mb-6">
