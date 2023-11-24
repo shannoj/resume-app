@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent } from "react";
-import { MyData, EducationItem } from "../App";
+import { MyData } from "../App";
 
 interface EducationProps {
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;

@@ -6,10 +6,10 @@ import {
   faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
 import Work, { WorkFormData } from "./components/WorkInfo";
-import General, { GeneralFormData } from "./components/GeneralInfo";
-import EducationInfo, { EducationFormData } from "./components/EducationInfo";
+import General from "./components/GeneralInfo";
+import EducationInfo from "./components/EducationInfo";
 import Resume from "./components/Resume";
-import { useState, ChangeEvent, FormEvent, ReactNode, useId } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import EducationResumeBlock from "./components/EducationResumeBlock";
 import WorkResumeBlock from "./components/WorkResumeBlock";
 import AddButton from "./components/AddButton";
@@ -143,29 +143,12 @@ export default function App() {
         ...prevData,
         [id]: value,
       }));
-    } else if (e.target.className.includes("education")) {
-      console.log("hello");
-    } else if (e.target.className.includes("general")) {
-      setGeneralFormData((prevData) => ({
-        ...prevData,
-        [id]: value,
-      }));
     }
   };
 
   const [editMode, setEditMode] = useState(false);
 
   const [formsSubmitted, setFormSubmitted] = useState<any[]>([]);
-
-  const [generalFormData, setGeneralFormData] = useState<GeneralFormData>({
-    inlinefirstname: "",
-    inlinelastname: "",
-    city: "",
-    state: "",
-    zip: "",
-    email: "",
-    phone: "",
-  });
 
   const [workFormData, setWorkFormData] = useState<WorkFormData>({
     company: "",
@@ -243,7 +226,6 @@ export default function App() {
                 data={data}
                 onFormSubmit={handleFormSubmit}
                 handleInputChange={handleGeneral}
-                formData={generalFormData}
                 editMode={editMode}
                 formSubmitted={checkSubmitted("general")}
                 handleEditClick={handleEditClick}
