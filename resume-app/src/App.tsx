@@ -13,9 +13,126 @@ import { useState, ChangeEvent, FormEvent, ReactNode, useId } from "react";
 import EducationResumeBlock from "./components/EducationResumeBlock";
 import WorkResumeBlock from "./components/WorkResumeBlock";
 import AddButton from "./components/AddButton";
+import { v4 as uuidv4 } from "uuid";
+
+export interface EducationItem {
+  school: string;
+  major: string;
+  yearended: string;
+  yearstarted: string;
+  id: string;
+  [key: string]: string;
+}
+
+export interface WorkItem {
+  company: string;
+  position: string;
+  details: string;
+  yearstart: string;
+  yearend: string;
+  id: string;
+}
+
+export interface GeneralItem {
+  name: string;
+  text: string;
+  /*
+  inlinefirstname: string;
+  inlinelastname: string;
+  city: string;
+  state: string;
+  zip: string;
+  email: string;
+  phone: string;
+  */
+}
+
+export interface MyData {
+  general: GeneralItem[];
+  work: WorkItem[];
+  education: EducationItem[];
+}
 
 export default function App() {
-  const [educationFormIds, setEducationFormIds] = useState<string[]>([]);
+  const [data, setData] = useState<MyData>({
+    general: [
+      { name: "inlinefirstname", text: "" },
+      { name: "inlinelastname", text: "" },
+      { name: "email", text: "" },
+      {
+        name: "phone",
+        text: "",
+      },
+      {
+        name: "city",
+        text: "",
+      },
+      {
+        name: "state",
+        text: "",
+      },
+      {
+        name: "zip",
+        text: "",
+      },
+    ],
+    work: [
+      {
+        company: "",
+        position: "",
+        details: "",
+        yearstart: "",
+        yearend: "",
+        id: uuidv4(),
+      },
+    ],
+    education: [
+      {
+        school: "",
+        major: "",
+        yearended: "",
+        yearstarted: "",
+        id: uuidv4(),
+      },
+    ],
+  });
+
+  const addEducation = () => {
+    setData({
+      ...data,
+      education: [
+        ...data.education,
+        { school: "", major: "", yearended: "", yearstarted: "", id: uuidv4() },
+      ],
+    });
+  };
+
+  const handleEducation = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    id: string
+  ) => {
+    setData({
+      ...data,
+      education: data.education.map((ed) => {
+        if (ed.id === id) {
+          ed[e.target.id] = e.target.value;
+        }
+        return ed;
+      }),
+    });
+  };
+
+  const handleGeneral = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    setData({
+      ...data,
+      general: data.general.map((element) => {
+        if (element.name === e.target.id) element.text = e.target.value;
+        return element;
+      }),
+    });
+  };
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -27,10 +144,7 @@ export default function App() {
         [id]: value,
       }));
     } else if (e.target.className.includes("education")) {
-      setEducationFormData((prevData) => ({
-        ...prevData,
-        [id]: value,
-      }));
+      console.log("hello");
     } else if (e.target.className.includes("general")) {
       setGeneralFormData((prevData) => ({
         ...prevData,
@@ -52,15 +166,6 @@ export default function App() {
     email: "",
     phone: "",
   });
-
-  const [educationFormData, setEducationFormData] = useState<EducationFormData>(
-    {
-      school: "",
-      major: "",
-      yearended: "",
-      yearstarted: "",
-    }
-  );
 
   const [workFormData, setWorkFormData] = useState<WorkFormData>({
     company: "",
@@ -116,10 +221,7 @@ export default function App() {
     if (formElement.id == "general-form") {
       setFormSubmitted([...formsSubmitted, "general"]);
     } else if (formElement.id.startsWith("education-form")) {
-      const originalId = educationFormIds.find((id) =>
-        formElement.id.endsWith(id)
-      );
-      setFormSubmitted([...formsSubmitted, originalId]);
+      setFormSubmitted([...formsSubmitted, "education"]);
     } else if (formElement.id == "work-form") {
       setFormSubmitted([...formsSubmitted, "work"]);
     }
@@ -127,43 +229,6 @@ export default function App() {
 
   const checkIsOpen = (name: string) => {
     return IsOpen.includes(name);
-  };
-
-  const [educationList, setEducationList] = useState<ReactNode[]>([
-    <EducationInfo
-      onFormSubmit={handleFormSubmit}
-      handleInputChange={handleInputChange}
-      formData={educationFormData}
-      editMode={editMode}
-      formSubmitted={checkSubmitted("education-form-zero")}
-      handleEditClick={handleEditClick}
-      handleSaveChangesClick={handleSaveChangesClick}
-      height={4 / 5}
-      key={0}
-      id={"education-form-zero"}
-    ></EducationInfo>,
-  ]);
-
-  const handleAddButtonClick = () => {
-    const newId = `education-form-${educationFormIds.length + 1}`;
-    setEducationFormIds((prevIds) => [...prevIds, newId]);
-
-    setEducationList((prevList) => [
-      ...prevList,
-      <EducationInfo
-        key={newId}
-        id={newId}
-        onFormSubmit={handleFormSubmit}
-        handleInputChange={handleInputChange}
-        formData={educationFormData}
-        editMode={editMode}
-        formSubmitted={checkSubmitted(newId)}
-        handleEditClick={handleEditClick}
-        handleSaveChangesClick={handleSaveChangesClick}
-        height={4 / 5}
-      ></EducationInfo>,
-    ]);
-    console.log(formsSubmitted);
   };
 
   return (
@@ -175,8 +240,9 @@ export default function App() {
             Id="general-form"
             children2={
               <General
+                data={data}
                 onFormSubmit={handleFormSubmit}
-                handleInputChange={handleInputChange}
+                handleInputChange={handleGeneral}
                 formData={generalFormData}
                 editMode={editMode}
                 formSubmitted={checkSubmitted("general")}
@@ -185,9 +251,7 @@ export default function App() {
                 height={4 / 5}
               ></General>
             }
-            children3={
-              <AddButton addButtonClick={handleAddButtonClick}></AddButton>
-            }
+            children3={<AddButton addButtonClick={addEducation}></AddButton>}
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
             IsOpen={checkIsOpen("general")}
@@ -197,17 +261,19 @@ export default function App() {
           <Dropdown
             title="Education"
             Id="education-form"
-            children2={educationList.map((educations, index) => (
-              <ul
-                key={index}
-                className="flex justify-center items-center min-h-[40%] min-w-[100%] my-8"
-              >
-                {educations}
-              </ul>
-            ))}
-            children3={
-              <AddButton addButtonClick={handleAddButtonClick}></AddButton>
+            children2={
+              <EducationInfo
+                onFormSubmit={handleFormSubmit}
+                handleEducation={handleEducation}
+                editMode={editMode}
+                formSubmitted={checkSubmitted("education")}
+                handleEditClick={handleEditClick}
+                handleSaveChangesClick={handleSaveChangesClick}
+                data={data}
+                height={4 / 5}
+              ></EducationInfo>
             }
+            children3={<AddButton addButtonClick={addEducation}></AddButton>}
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
             IsOpen={checkIsOpen("education")}
@@ -229,9 +295,7 @@ export default function App() {
                 height={4 / 5}
               ></Work>
             }
-            children3={
-              <AddButton addButtonClick={handleAddButtonClick}></AddButton>
-            }
+            children3={<AddButton addButtonClick={addEducation}></AddButton>}
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
             IsOpen={checkIsOpen("work")}
@@ -240,21 +304,8 @@ export default function App() {
           </Dropdown>
         </div>
         <div className="flex flex-col justify-center items-center bg-slate-500 h-[95%] w-1/2 mr-5">
-          <Resume
-            firstName={generalFormData.inlinefirstname}
-            lastName={generalFormData.inlinelastname}
-            email={generalFormData.email}
-            phone={generalFormData.phone}
-            city={generalFormData.city}
-            state={generalFormData.state}
-            zip={generalFormData.zip}
-          >
-            <EducationResumeBlock
-              school={educationFormData.school}
-              major={educationFormData.major}
-              yearstarted={educationFormData.yearstarted}
-              yearended={educationFormData.yearended}
-            ></EducationResumeBlock>
+          <Resume data={data}>
+            <EducationResumeBlock data={data}></EducationResumeBlock>
             <WorkResumeBlock
               company={workFormData.company}
               position={workFormData.position}

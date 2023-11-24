@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent } from "react";
+import { MyData } from "../App";
 
 interface GeneralProps {
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -11,6 +12,7 @@ interface GeneralProps {
   editMode: boolean;
   formSubmitted: boolean;
   height: number;
+  data: MyData;
 }
 
 export interface GeneralFormData {
@@ -32,6 +34,7 @@ function General({
   editMode,
   formSubmitted,
   height,
+  data,
 }: GeneralProps) {
   return (
     <>
@@ -59,11 +62,11 @@ function General({
                     className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                     id="inlinefirstname"
                     type="text"
-                    value={formData.inlinefirstname}
+                    value={data.general[0].text}
                     onChange={handleInputChange}
                   ></input>
                 ) : (
-                  <span>{formData.inlinefirstname}</span>
+                  <span>{data.general[0].text}</span>
                 )
               ) : (
                 <input
@@ -92,11 +95,11 @@ function General({
                     className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                     id="inlinelastname"
                     type="text"
-                    value={formData.inlinelastname}
+                    value={data.general[1].text}
                     onChange={handleInputChange}
                   ></input>
                 ) : (
-                  <span>{formData.inlinelastname}</span>
+                  <span>{data.general[1].text}</span>
                 )
               ) : (
                 <input
@@ -125,11 +128,11 @@ function General({
                     className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                     id="email"
                     type="email"
-                    value={formData.email}
+                    value={data.general[2].text}
                     onChange={handleInputChange}
                   ></input>
                 ) : (
-                  <span>{formData.email}</span>
+                  <span>{data.general[2].text}</span>
                 )
               ) : (
                 <input
@@ -158,11 +161,11 @@ function General({
                     className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                     id="phone"
                     type="tel"
-                    value={formData.phone}
+                    value={data.general[3].text}
                     onChange={handleInputChange}
                   ></input>
                 ) : (
-                  <span>{formData.phone}</span>
+                  <span>{data.general[3].text}</span>
                 )
               ) : (
                 <input
@@ -189,11 +192,11 @@ function General({
                     className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                     id="city"
                     type="text"
-                    value={formData.city}
+                    value={data.general[4].text}
                     onChange={handleInputChange}
                   ></input>
                 ) : (
-                  <span>{formData.city}</span>
+                  <span>{data.general[4].text}</span>
                 )
               ) : (
                 <input
@@ -218,7 +221,7 @@ function General({
                     <select
                       className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                       id="state"
-                      value={formData.state}
+                      value={data.general[5].text}
                       onChange={handleInputChange}
                     >
                       <option value="-">-</option>
@@ -275,7 +278,7 @@ function General({
                       <option value="WY">Wyoming</option>
                     </select>
                   ) : (
-                    <span>{formData.state}</span>
+                    <span>{data.general[5].text}</span>
                   )
                 ) : (
                   <select
@@ -361,11 +364,11 @@ function General({
                     className="general bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                     id="zip"
                     type="text"
-                    value={formData.zip}
+                    value={data.general[6].text}
                     onChange={handleInputChange}
                   ></input>
                 ) : (
-                  <span>{formData.zip}</span>
+                  <span>{data.general[6].text}</span>
                 )
               ) : (
                 <input
