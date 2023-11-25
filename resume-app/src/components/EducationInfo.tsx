@@ -13,6 +13,7 @@ interface EducationProps {
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
     id: string
   ) => void;
+  saveClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface EducationFormData {
@@ -31,6 +32,7 @@ function EducationInfo({
   height,
   data,
   handleEducation,
+  saveClick,
 }: EducationProps) {
   return (
     <>
@@ -41,8 +43,8 @@ function EducationInfo({
         >
           <form
             className="flex w-full max-w-sm flex-col align-center justify-start"
-            onSubmit={onFormSubmit}
-            id="education-form"
+            //onSubmit={onFormSubmit}
+            id={`education-form-${index}`}
           >
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3 mt-2 ml-2">
@@ -198,6 +200,8 @@ function EducationInfo({
                   <button
                     className="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                     type="submit"
+                    id={`education-form-${index}`}
+                    onClick={saveClick}
                   >
                     Save
                   </button>

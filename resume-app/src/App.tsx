@@ -88,8 +88,9 @@ export default function App() {
       },
     ],
   });
-
+  let edCount = 0;
   const addEducation = () => {
+    edCount += 1;
     setData({
       ...data,
       education: [
@@ -166,7 +167,6 @@ export default function App() {
 
   const ToggleDropdown = (e: React.MouseEvent<SVGSVGElement>) => {
     const formElement = e.target as HTMLFormElement;
-    console.log(formElement.id);
     if (formElement.id == "general-form") {
       if (IsOpen.includes("general")) {
         SetIsOpen(IsOpen.filter((id) => id !== "general"));
@@ -204,13 +204,18 @@ export default function App() {
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formElement = e.target as HTMLFormElement;
+    console.log(formElement.id);
+    if (!formsSubmitted.includes(formElement.id)) {
+      setFormSubmitted([...formsSubmitted, formElement.id]);
+    }
+  };
 
-    if (formElement.id == "general-form") {
-      setFormSubmitted([...formsSubmitted, "general"]);
-    } else if (formElement.id == "education-form") {
-      setFormSubmitted([...formsSubmitted, "education"]);
-    } else if (formElement.id == "work-form") {
-      setFormSubmitted([...formsSubmitted, "work"]);
+  const saveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const clickElement = e.target as HTMLButtonElement;
+    if (!formsSubmitted.includes(clickElement.id)) {
+      setFormSubmitted([...formsSubmitted, clickElement.id]);
+    } else {
+      setFormSubmitted(formsSubmitted.filter((id) => id != clickElement.id));
     }
   };
 
@@ -231,7 +236,7 @@ export default function App() {
                 onFormSubmit={handleFormSubmit}
                 handleInputChange={handleGeneral}
                 editMode={editMode}
-                formSubmitted={checkSubmitted("general")}
+                formSubmitted={checkSubmitted("general-form")}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
                 height={4 / 5}
@@ -252,11 +257,12 @@ export default function App() {
                 onFormSubmit={handleFormSubmit}
                 handleEducation={handleEducation}
                 editMode={editMode}
-                formSubmitted={checkSubmitted("education")}
+                formSubmitted={checkSubmitted("education-form-" + edCount)}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
                 data={data}
                 height={4 / 5}
+                saveClick={saveClick}
               ></EducationInfo>
             }
             children3={<AddButton addButtonClick={addEducation}></AddButton>}
@@ -275,7 +281,7 @@ export default function App() {
                 onFormSubmit={handleFormSubmit}
                 handleWork={handleWork}
                 editMode={editMode}
-                formSubmitted={checkSubmitted("work")}
+                formSubmitted={checkSubmitted("work-form")}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
                 height={4 / 5}

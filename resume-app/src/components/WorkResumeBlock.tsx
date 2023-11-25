@@ -11,7 +11,10 @@ function WorkResumeBlock({ data }: Work) {
           <p className="font-bold">Work Experience:</p>
         </div>
         {data.work.map((element) => (
-          <div className="flex flex-row items-start justify-start h-2/6 w-full mx-3 px-4">
+          <div
+            className="flex flex-row items-start justify-start h-2/6 w-full mx-3 px-4"
+            key={element.id}
+          >
             <div className="flex flex-col h-full w-4/5 items-start justify-start">
               <p>{element.company}</p>
               <p className="text-sm">{element.position}</p>
