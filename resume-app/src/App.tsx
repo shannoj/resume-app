@@ -99,8 +99,9 @@ export default function App() {
       ],
     });
   };
-
+  let wrCount = 0;
   const addWork = () => {
+    wrCount += 1;
     setData({
       ...data,
       work: [
@@ -281,7 +282,7 @@ export default function App() {
                 onFormSubmit={handleFormSubmit}
                 handleWork={handleWork}
                 editMode={editMode}
-                formSubmitted={checkSubmitted("work-form")}
+                formSubmitted={checkSubmitted("work-form-" + wrCount)}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
                 height={4 / 5}
