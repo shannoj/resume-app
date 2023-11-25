@@ -5,7 +5,7 @@ import {
   faUser,
   faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
-import Work, { WorkFormData } from "./components/WorkInfo";
+import Work from "./components/WorkInfo";
 import General from "./components/GeneralInfo";
 import EducationInfo from "./components/EducationInfo";
 import Resume from "./components/Resume";
@@ -31,20 +31,12 @@ export interface WorkItem {
   yearstart: string;
   yearend: string;
   id: string;
+  [key: string]: string;
 }
 
 export interface GeneralItem {
   name: string;
   text: string;
-  /*
-  inlinefirstname: string;
-  inlinelastname: string;
-  city: string;
-  state: string;
-  zip: string;
-  email: string;
-  phone: string;
-  */
 }
 
 export interface MyData {
@@ -107,6 +99,23 @@ export default function App() {
     });
   };
 
+  const addWork = () => {
+    setData({
+      ...data,
+      work: [
+        ...data.work,
+        {
+          company: "",
+          position: "",
+          details: "",
+          yearstart: "",
+          yearend: "",
+          id: uuidv4(),
+        },
+      ],
+    });
+  };
+
   const handleEducation = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
     id: string
@@ -118,6 +127,21 @@ export default function App() {
           ed[e.target.id] = e.target.value;
         }
         return ed;
+      }),
+    });
+  };
+
+  const handleWork = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    id: string
+  ) => {
+    setData({
+      ...data,
+      work: data.work.map((wr) => {
+        if (wr.id === id) {
+          wr[e.target.id] = e.target.value;
+        }
+        return wr;
       }),
     });
   };
@@ -134,29 +158,9 @@ export default function App() {
     });
   };
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const { id, value } = e.target;
-    if (e.target.className.includes("work")) {
-      setWorkFormData((prevData) => ({
-        ...prevData,
-        [id]: value,
-      }));
-    }
-  };
-
   const [editMode, setEditMode] = useState(false);
 
   const [formsSubmitted, setFormSubmitted] = useState<any[]>([]);
-
-  const [workFormData, setWorkFormData] = useState<WorkFormData>({
-    company: "",
-    position: "",
-    details: "",
-    yearstart: "",
-    yearend: "",
-  });
 
   const [IsOpen, SetIsOpen] = useState<any[]>([]);
 
@@ -203,7 +207,7 @@ export default function App() {
 
     if (formElement.id == "general-form") {
       setFormSubmitted([...formsSubmitted, "general"]);
-    } else if (formElement.id.startsWith("education-form")) {
+    } else if (formElement.id == "education-form") {
       setFormSubmitted([...formsSubmitted, "education"]);
     } else if (formElement.id == "work-form") {
       setFormSubmitted([...formsSubmitted, "work"]);
@@ -267,9 +271,9 @@ export default function App() {
             Id="work-form"
             children2={
               <Work
+                data={data}
                 onFormSubmit={handleFormSubmit}
-                handleInputChange={handleInputChange}
-                formData={workFormData}
+                handleWork={handleWork}
                 editMode={editMode}
                 formSubmitted={checkSubmitted("work")}
                 handleEditClick={handleEditClick}
@@ -277,7 +281,7 @@ export default function App() {
                 height={4 / 5}
               ></Work>
             }
-            children3={<AddButton addButtonClick={addEducation}></AddButton>}
+            children3={<AddButton addButtonClick={addWork}></AddButton>}
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
             IsOpen={checkIsOpen("work")}
@@ -288,13 +292,7 @@ export default function App() {
         <div className="flex flex-col justify-center items-center bg-slate-500 h-[95%] w-1/2 mr-5">
           <Resume data={data}>
             <EducationResumeBlock data={data}></EducationResumeBlock>
-            <WorkResumeBlock
-              company={workFormData.company}
-              position={workFormData.position}
-              details={workFormData.details}
-              yearstart={workFormData.yearstart}
-              yearend={workFormData.yearend}
-            ></WorkResumeBlock>
+            <WorkResumeBlock data={data}></WorkResumeBlock>
           </Resume>
         </div>
       </div>

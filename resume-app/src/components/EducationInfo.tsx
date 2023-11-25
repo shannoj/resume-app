@@ -42,6 +42,7 @@ function EducationInfo({
           <form
             className="flex w-full max-w-sm flex-col align-center justify-start"
             onSubmit={onFormSubmit}
+            id="education-form"
           >
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3 mt-2 ml-2">

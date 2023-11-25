@@ -1,4 +1,4 @@
-import { MyData, EducationItem } from "../App";
+import { MyData } from "../App";
 
 export interface Education {
   data: MyData;

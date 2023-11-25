@@ -6,7 +6,6 @@ interface GeneralProps {
   handleInputChange: (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => void;
-  formData: GeneralFormData;
   handleEditClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleSaveChangesClick: () => void;
   editMode: boolean;
@@ -28,7 +27,6 @@ export interface GeneralFormData {
 function General({
   onFormSubmit,
   handleInputChange,
-  formData,
   handleEditClick,
   handleSaveChangesClick,
   editMode,
