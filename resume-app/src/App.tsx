@@ -88,9 +88,12 @@ export default function App() {
       },
     ],
   });
-  let edCount = 0;
+
+  const [edCount, setEdCount] = useState(0);
+
+  console.log(edCount);
   const addEducation = () => {
-    edCount += 1;
+    setEdCount(edCount + 1);
     setData({
       ...data,
       education: [
@@ -162,7 +165,7 @@ export default function App() {
 
   const [editMode, setEditMode] = useState(false);
 
-  const [formsSubmitted, setFormSubmitted] = useState<any[]>([]);
+  const [formsSubmitted, setFormSubmitted] = useState<string[]>([]);
 
   const [IsOpen, SetIsOpen] = useState<any[]>([]);
 
@@ -198,25 +201,20 @@ export default function App() {
     setEditMode(false);
   };
 
-  const checkSubmitted = (name: string) => {
-    return formsSubmitted.includes(name);
+  const checkSubmitted = (formId: string) => {
+    return formsSubmitted.includes(formId);
   };
+
+  let edCheck = "education-form-" + edCount;
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formElement = e.target as HTMLFormElement;
+    const formId = formElement.id;
     console.log(formElement.id);
-    if (!formsSubmitted.includes(formElement.id)) {
-      setFormSubmitted([...formsSubmitted, formElement.id]);
-    }
-  };
-
-  const saveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const clickElement = e.target as HTMLButtonElement;
-    if (!formsSubmitted.includes(clickElement.id)) {
-      setFormSubmitted([...formsSubmitted, clickElement.id]);
-    } else {
-      setFormSubmitted(formsSubmitted.filter((id) => id != clickElement.id));
+    console.log(edCheck);
+    if (!formsSubmitted.includes(formId)) {
+      setFormSubmitted((prevFormsSubmitted) => [...prevFormsSubmitted, formId]);
     }
   };
 
@@ -258,12 +256,11 @@ export default function App() {
                 onFormSubmit={handleFormSubmit}
                 handleEducation={handleEducation}
                 editMode={editMode}
-                formSubmitted={checkSubmitted("education-form-" + edCount)}
+                formSubmitted={checkSubmitted(edCheck)}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
                 data={data}
                 height={4 / 5}
-                saveClick={saveClick}
               ></EducationInfo>
             }
             children3={<AddButton addButtonClick={addEducation}></AddButton>}
