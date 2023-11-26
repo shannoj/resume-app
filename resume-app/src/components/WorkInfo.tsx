@@ -232,7 +232,6 @@ function Work({
           </form>
         </div>
       ))}
-      ;
     </>
   );
 }

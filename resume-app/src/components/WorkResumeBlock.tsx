@@ -20,7 +20,7 @@ function WorkResumeBlock({ data }: Work) {
               <p className="text-sm">{element.position}</p>
               <p className="text-xs pl-3">{element.details}</p>
             </div>
-            <div className="flex flex-row items-center justify-center w-1/5">
+            <div className="flex flex-row items-center justify-center w-1/5 h-full">
               <p className="flex flex-end ">{element.yearstart + "- "}</p>
               <p className="flex flex-end">{element.yearend}</p>
             </div>

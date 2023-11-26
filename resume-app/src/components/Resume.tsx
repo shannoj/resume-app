@@ -19,7 +19,7 @@ function Resume({ children, data }: Props) {
         <p className="text-xs">{data.general[2].text}</p>
         <p className="text-xs">{data.general[3].text}</p>
         <p className="text-xs">
-          {data.general[4].text}&nbsp;{data.general[5].text}&nbsp;
+          {data.general[4].text + ","}&nbsp;{data.general[5].text + ","}&nbsp;
           {data.general[6].text}
         </p>
       </div>
