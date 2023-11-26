@@ -254,35 +254,23 @@ export default function App() {
             title="Background Information"
             Id="general-form"
             children2={
-              /* <General
-                data={data}
+              <General
                 onFormSubmit={handleFormSubmit}
                 handleInputChange={handleGeneral}
-                editMode={editMode}
+                editMode={checkInEdit("general-form")}
                 formSubmitted={checkSubmitted("general-form")}
-                handleEditClick={handleEditClick(id)}
+                handleEditClick={handleEditClick}
+                addSubmitted={handleSubmit}
                 handleSaveChangesClick={handleSaveChangesClick}
                 height={4 / 5}
-              ></General> */
-              data.education.map((ed, index) => (
-                <EducationInfo
-                  key={index}
-                  onFormSubmit={handleFormSubmit}
-                  handleEducation={handleEducation}
-                  editMode={checkInEdit(ed.id)}
-                  formSubmitted={checkSubmitted(ed.id)}
-                  handleEditClick={handleEditClick}
-                  handleSaveChangesClick={handleSaveChangesClick}
-                  height={4 / 5}
-                  removeClick={removeEducation}
-                  addSubmited={handleSubmit}
-                  school={ed.school}
-                  major={ed.major}
-                  yearstart={ed.yearstarted}
-                  yearend={ed.yearended}
-                  id={ed.id}
-                ></EducationInfo>
-              ))
+                email={data.general[2].text}
+                phone={data.general[3].text}
+                inlinefirstname={data.general[0].text}
+                inlinelastname={data.general[1].text}
+                city={data.general[4].text}
+                state={data.general[5].text}
+                zip={data.general[6].text}
+              ></General>
             }
             children3={<AddButton addButtonClick={addEducation}></AddButton>}
             height={4 / 5}
