@@ -125,6 +125,13 @@ export default function App() {
     });
   };
 
+  const removeWork = (id: string) => {
+    setData({
+      ...data,
+      work: data.work.filter((wr) => wr.id !== id),
+    });
+  };
+
   const handleEducation = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
     id: string
@@ -316,39 +323,26 @@ export default function App() {
           <Dropdown
             title="Experience"
             Id="work-form"
-            children2={
-              /*
+            children2={data.work.map((wr, index) => (
               <Work
-                data={data}
+                key={index}
                 onFormSubmit={handleFormSubmit}
                 handleWork={handleWork}
-                editMode={editMode}
-                formSubmitted={checkSubmitted("work-form-" + wrCount)}
+                editMode={checkInEdit(wr.id)}
+                formSubmitted={checkSubmitted(wr.id)}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
+                addSubmited={handleSubmit}
+                removeClick={removeWork}
                 height={4 / 5}
+                position={wr.position}
+                company={wr.company}
+                details={wr.details}
+                yearend={wr.yearend}
+                yearstart={wr.yearstart}
+                id={wr.id}
               ></Work>
-              */
-              data.education.map((ed, index) => (
-                <EducationInfo
-                  key={index}
-                  onFormSubmit={handleFormSubmit}
-                  handleEducation={handleEducation}
-                  editMode={checkInEdit(ed.id)}
-                  formSubmitted={checkSubmitted(ed.id)}
-                  handleEditClick={handleEditClick}
-                  handleSaveChangesClick={handleSaveChangesClick}
-                  height={4 / 5}
-                  removeClick={removeEducation}
-                  addSubmited={handleSubmit}
-                  school={ed.school}
-                  major={ed.major}
-                  yearstart={ed.yearstarted}
-                  yearend={ed.yearended}
-                  id={ed.id}
-                ></EducationInfo>
-              ))
-            }
+            ))}
             children3={<AddButton addButtonClick={addWork}></AddButton>}
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
