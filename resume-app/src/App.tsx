@@ -89,11 +89,7 @@ export default function App() {
     ],
   });
 
-  const [edCount, setEdCount] = useState(0);
-
-  console.log(edCount);
   const addEducation = () => {
-    setEdCount(edCount + 1);
     setData({
       ...data,
       education: [
@@ -171,6 +167,8 @@ export default function App() {
     });
   };
 
+  const [formsInEdit, setFormsInEdit] = useState<string[]>([]);
+
   const [editMode, setEditMode] = useState(false);
 
   const [formsSubmitted, setFormSubmitted] = useState<string[]>([]);
@@ -200,34 +198,41 @@ export default function App() {
     }
   };
 
-  const handleEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setEditMode(true);
+  const removeFromEdit = (id: string) => {
+    setFormsInEdit(formsInEdit.filter((element) => element !== id));
   };
 
-  const handleSaveChangesClick = () => {
-    setEditMode(false);
+  const handleEditClick = (id: string) => {
+    setFormsInEdit([...formsInEdit, id]);
+  };
+
+  const checkInEdit = (id: string) => {
+    return formsInEdit.includes(id);
+  };
+
+  const handleSaveChangesClick = (id: string) => {
+    removeFromEdit(id);
   };
 
   const checkSubmitted = (formId: string) => {
     return formsSubmitted.includes(formId);
   };
 
-  let edCheck = "education-form-" + edCount;
-
   const handleSubmit = (id: string) => {
-    setFormSubmitted((prevFormsSubmitted) => [...prevFormsSubmitted, id]);
+    setFormSubmitted([...formsSubmitted, id]);
+    console.log(formsSubmitted);
   };
+
+  console.log(formsSubmitted);
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formElement = e.target as HTMLFormElement;
     const formId = formElement.id;
     console.log(formElement.id);
-    console.log(edCheck);
-    if (!formsSubmitted.includes(formId)) {
+    /*if (!formsSubmitted.includes(formId)) {
       setFormSubmitted((prevFormsSubmitted) => [...prevFormsSubmitted, formId]);
-    }
+    }*/
   };
 
   const checkIsOpen = (name: string) => {
@@ -242,16 +247,35 @@ export default function App() {
             title="Background Information"
             Id="general-form"
             children2={
-              <General
+              /* <General
                 data={data}
                 onFormSubmit={handleFormSubmit}
                 handleInputChange={handleGeneral}
                 editMode={editMode}
                 formSubmitted={checkSubmitted("general-form")}
-                handleEditClick={handleEditClick}
+                handleEditClick={handleEditClick(id)}
                 handleSaveChangesClick={handleSaveChangesClick}
                 height={4 / 5}
-              ></General>
+              ></General> */
+              data.education.map((ed, index) => (
+                <EducationInfo
+                  key={index}
+                  onFormSubmit={handleFormSubmit}
+                  handleEducation={handleEducation}
+                  editMode={checkInEdit(ed.id)}
+                  formSubmitted={checkSubmitted(ed.id)}
+                  handleEditClick={handleEditClick}
+                  handleSaveChangesClick={handleSaveChangesClick}
+                  height={4 / 5}
+                  removeClick={removeEducation}
+                  addSubmited={handleSubmit}
+                  school={ed.school}
+                  major={ed.major}
+                  yearstart={ed.yearstarted}
+                  yearend={ed.yearended}
+                  id={ed.id}
+                ></EducationInfo>
+              ))
             }
             children3={<AddButton addButtonClick={addEducation}></AddButton>}
             height={4 / 5}
@@ -268,7 +292,7 @@ export default function App() {
                 key={index}
                 onFormSubmit={handleFormSubmit}
                 handleEducation={handleEducation}
-                editMode={editMode}
+                editMode={checkInEdit(ed.id)}
                 formSubmitted={checkSubmitted(ed.id)}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
@@ -293,6 +317,7 @@ export default function App() {
             title="Experience"
             Id="work-form"
             children2={
+              /*
               <Work
                 data={data}
                 onFormSubmit={handleFormSubmit}
@@ -303,6 +328,26 @@ export default function App() {
                 handleSaveChangesClick={handleSaveChangesClick}
                 height={4 / 5}
               ></Work>
+              */
+              data.education.map((ed, index) => (
+                <EducationInfo
+                  key={index}
+                  onFormSubmit={handleFormSubmit}
+                  handleEducation={handleEducation}
+                  editMode={checkInEdit(ed.id)}
+                  formSubmitted={checkSubmitted(ed.id)}
+                  handleEditClick={handleEditClick}
+                  handleSaveChangesClick={handleSaveChangesClick}
+                  height={4 / 5}
+                  removeClick={removeEducation}
+                  addSubmited={handleSubmit}
+                  school={ed.school}
+                  major={ed.major}
+                  yearstart={ed.yearstarted}
+                  yearend={ed.yearended}
+                  id={ed.id}
+                ></EducationInfo>
+              ))
             }
             children3={<AddButton addButtonClick={addWork}></AddButton>}
             height={4 / 5}

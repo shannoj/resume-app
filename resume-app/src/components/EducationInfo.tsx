@@ -1,16 +1,14 @@
 import { ChangeEvent, FormEvent } from "react";
-import { MyData } from "../App";
 
 interface EducationProps {
   onFormSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  handleEditClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  handleSaveChangesClick: () => void;
+  handleEditClick: (id: string) => void;
+  handleSaveChangesClick: (id: string) => void;
   editMode: boolean;
   formSubmitted: boolean;
   height: number;
   removeClick: (id: string) => void;
   addSubmited: (id: string) => void;
-  data: MyData;
   handleEducation: (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
     id: string
@@ -36,7 +34,6 @@ function EducationInfo({
   editMode,
   formSubmitted,
   height,
-  data,
   handleEducation,
   removeClick,
   addSubmited,
@@ -192,7 +189,7 @@ function EducationInfo({
                     <button
                       className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                       type="submit"
-                      onClick={handleSaveChangesClick}
+                      onClick={() => handleSaveChangesClick(id)}
                     >
                       Save Changes
                     </button>
@@ -208,7 +205,7 @@ function EducationInfo({
                   <button
                     className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                     type="button"
-                    onClick={handleEditClick}
+                    onClick={() => handleEditClick(id)}
                   >
                     Edit
                   </button>
