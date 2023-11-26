@@ -102,6 +102,7 @@ export default function App() {
       ],
     });
   };
+
   let wrCount = 0;
   const addWork = () => {
     wrCount += 1;
@@ -118,6 +119,13 @@ export default function App() {
           id: uuidv4(),
         },
       ],
+    });
+  };
+
+  const removeEducation = (id: string) => {
+    setData({
+      ...data,
+      education: data.education.filter((ed) => ed.id !== id),
     });
   };
 
@@ -261,6 +269,7 @@ export default function App() {
                 handleSaveChangesClick={handleSaveChangesClick}
                 data={data}
                 height={4 / 5}
+                removeClick={removeEducation}
               ></EducationInfo>
             }
             children3={<AddButton addButtonClick={addEducation}></AddButton>}

@@ -8,6 +8,8 @@ interface EducationProps {
   editMode: boolean;
   formSubmitted: boolean;
   height: number;
+  removeClick: (id: string) => void;
+  addSubmited: (id: string) => void;
   data: MyData;
   handleEducation: (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
@@ -31,6 +33,8 @@ function EducationInfo({
   height,
   data,
   handleEducation,
+  removeClick,
+  addSubmited,
 }: EducationProps) {
   return (
     <>
@@ -72,7 +76,6 @@ function EducationInfo({
                     id="school"
                     placeholder="Harvard"
                     type="text"
-                    //value={ed.school}
                     onChange={(e) => handleEducation(e, ed.id)}
                   />
                 )}
@@ -178,13 +181,22 @@ function EducationInfo({
               <div className="md:w-full flex justify-center align-center">
                 {formSubmitted ? (
                   editMode ? (
-                    <button
-                      className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                      type="submit"
-                      onClick={handleSaveChangesClick}
-                    >
-                      Save Changes
-                    </button>
+                    <>
+                      <button
+                        className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                        type="submit"
+                        onClick={handleSaveChangesClick}
+                      >
+                        Save Changes
+                      </button>
+                      <button
+                        className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 ml-2 rounded"
+                        type="button"
+                        onClick={() => removeClick(ed.id)}
+                      >
+                        Remove
+                      </button>
+                    </>
                   ) : (
                     <button
                       className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
@@ -195,13 +207,22 @@ function EducationInfo({
                     </button>
                   )
                 ) : (
-                  <button
-                    className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                    type="submit"
-                    id={`education-form-${index}`}
-                  >
-                    Save
-                  </button>
+                  <>
+                    <button
+                      className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                      type="submit"
+                      onClick={() => addSubmited(ed.id)}
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 ml-2 rounded"
+                      type="button"
+                      onClick={() => removeClick(ed.id)}
+                    >
+                      Remove
+                    </button>
+                  </>
                 )}
               </div>
             </div>
