@@ -215,6 +215,10 @@ export default function App() {
 
   let edCheck = "education-form-" + edCount;
 
+  const handleSubmit = (id: string) => {
+    setFormSubmitted((prevFormsSubmitted) => [...prevFormsSubmitted, id]);
+  };
+
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formElement = e.target as HTMLFormElement;
@@ -259,19 +263,25 @@ export default function App() {
           <Dropdown
             title="Education"
             Id="education-form"
-            children2={
+            children2={data.education.map((ed, index) => (
               <EducationInfo
+                key={index}
                 onFormSubmit={handleFormSubmit}
                 handleEducation={handleEducation}
                 editMode={editMode}
-                formSubmitted={checkSubmitted(edCheck)}
+                formSubmitted={checkSubmitted(ed.id)}
                 handleEditClick={handleEditClick}
                 handleSaveChangesClick={handleSaveChangesClick}
-                data={data}
                 height={4 / 5}
                 removeClick={removeEducation}
+                addSubmited={handleSubmit}
+                school={ed.school}
+                major={ed.major}
+                yearstart={ed.yearstarted}
+                yearend={ed.yearended}
+                id={ed.id}
               ></EducationInfo>
-            }
+            ))}
             children3={<AddButton addButtonClick={addEducation}></AddButton>}
             height={4 / 5}
             ToggleDropdown={ToggleDropdown}
