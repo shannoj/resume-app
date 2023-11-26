@@ -27,7 +27,6 @@ function WorkResumeBlock({ data }: Work) {
           </div>
         ))}
       </div>
-      ;
     </>
   );
 }
